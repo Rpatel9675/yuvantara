@@ -1,0 +1,900 @@
+﻿<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0A0E17"><title>Admin Command Center | Yuvantara</title><link rel="stylesheet" href="../assets/style.css?v=20261127c"><link rel="stylesheet" href="../assets/portal.css?v=20261127c"><style>
+/* Admin specific accents */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(220,38,38,.12);
+  border: 1px solid rgba(220,38,38,.3);
+  color: #EF4444;
+  border-radius: 99px;
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.admin-card-header {
+  background: linear-gradient(135deg, #090D16 0%, #111827 100%);
+  border: 1px solid #1F2937;
+}
+.kpi-num {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 4px 0 2px;
+  line-height: 1.1;
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 250;
+  display: none;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: block; }
+.modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  width: min(580px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 260;
+  display: none;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,.35);
+}
+.modal-box.open { display: block; }
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+.modal-header h3 { margin: 0; font-size: 1.25rem; color: #0F172A; }
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #64748B;
+  padding: 4px;
+}
+</style><link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192.png">
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+<link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+<meta name="theme-color" content="#0A0E17">
+<meta property="og:image" content="https://yuvantaraventure.com/assets/images/og-image.png">
+<meta name="twitter:image" content="https://yuvantaraventure.com/assets/images/og-image.png">
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ═══ AUTH MODAL ═══ -->
+<div id="auth-overlay" class="auth-overlay" aria-hidden="true"></div>
+<div id="auth-modal" class="auth-modal" role="dialog" aria-modal="true" aria-label="Login or Sign up" aria-hidden="true">
+  <button class="auth-close" aria-label="Close">✕</button>
+  <div class="auth-tabs">
+    <button class="auth-tab-btn active" data-tab="login">Login</button>
+    <button class="auth-tab-btn" data-tab="signup">Apply / Sign Up</button>
+  </div>
+  <div class="auth-pane active" data-pane="login">
+    <h2 class="auth-title">Welcome back</h2>
+    <p class="auth-sub">Log in to your Yuvantara portal</p>
+    <form id="form-login" class="auth-form" novalidate>
+      <div class="fgroup"><label for="l-email">Email address</label><input id="l-email" type="email" placeholder="you@example.com" required autocomplete="email"></div>
+      <div class="fgroup"><label for="l-pass">Password</label><input id="l-pass" type="password" placeholder="••••••••" required autocomplete="current-password"></div>
+      <div class="fgroup captcha-group"><label>Captcha — <span class="captcha-q" id="cap-login-q"></span></label><input id="cap-login-a" type="number" placeholder="Your answer" required min="0"></div>
+      <button class="btn p auth-submit" type="submit">Login</button>
+      <p class="auth-switch">Don't have an account? <button type="button" class="auth-tab-btn link" data-tab="signup">Sign up</button></p>
+    </form>
+  </div>
+  <div class="auth-pane" data-pane="signup">
+    <h2 class="auth-title">Apply for Internship</h2>
+    <p class="auth-sub">Join the Yuvantara industrial training program</p>
+    <form id="form-signup" class="auth-form" novalidate>
+      <div class="fgroup"><label for="s-name">Full name</label><input id="s-name" type="text" placeholder="Your full name" required autocomplete="name"></div>
+      <div class="frow">
+        <div class="fgroup"><label for="s-email">Email address</label><input id="s-email" type="email" placeholder="you@example.com" required autocomplete="email"></div>
+        <div class="fgroup"><label for="s-phone">WhatsApp / Phone</label><input id="s-phone" type="tel" placeholder="+91 98765 43210" required></div>
+      </div>
+      <div class="frow"><div class="fgroup"><label for="s-dob">Date of Birth</label><input id="s-dob" type="date" required max="2010-01-01"></div><div class="fgroup"><label for="s-pass">Password</label><input id="s-pass" type="password" placeholder="Create password" required autocomplete="new-password"></div></div>
+      <div class="fgroup"><label for="s-pass-confirm">Confirm Password</label><input id="s-pass-confirm" type="password" placeholder="Confirm your password" required autocomplete="new-password"></div>
+      <div class="frow">
+        <div class="fgroup" style="display:none">
+          <label for="s-prog">Internship Track</label>
+          <select id="s-prog">
+            <option value="">Select track</option>
+            <option>Cybersecurity &amp; SOC Operations</option>
+            <option>Artificial Intelligence &amp; Machine Learning</option>
+            <option>Cloud Infrastructure &amp; DevOps</option>
+            <option>Python Full-Stack &amp; Automation</option>
+            <option>Robotics &amp; IoT Embedded Systems</option>
+            <option>Data Science &amp; Business Analytics</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label for="s-stream">Stream / Degree</label>
+          <select id="s-stream" required>
+            <option value="">Select stream</option>
+            <option>B.Tech / B.E (CSE, IT, ECE, EE)</option>
+            <option>MCA / M.Tech</option>
+            <option>BCA / B.Sc Computer Science</option>
+            <option>Diploma in Engineering</option>
+            <option>Other Graduate / Post Graduate</option>
+          </select>
+        </div>
+      </div>
+      <div class="fgroup"><label for="s-college">College / University name</label><input id="s-college" type="text" placeholder="e.g. NIT Patna" required></div>
+      <div class="fgroup checkbox-group" style="margin:10px 0 12px"><label style="display:flex;align-items:flex-start;gap:8px;font-size:0.83rem;color:#334155;cursor:pointer;line-height:1.4"><input type="checkbox" id="s-declaration" required style="margin-top:2px;accent-color:#0284C7;width:16px;height:16px;flex-shrink:0"><span><strong>Self-Declaration:</strong> I hereby declare that all details provided are genuine and accurate. I agree to abide by Yuvantara Corporate Policies and IT Act compliance.</span></label></div>
+      <div class="fgroup captcha-group"><label>Captcha — <span class="captcha-q" id="cap-signup-q"></span></label><input id="cap-signup-a" type="number" placeholder="Your answer" required min="0"></div>
+      <button class="btn p auth-submit" type="submit">Submit Application</button>
+      <p class="auth-switch">Already have an account? <button type="button" class="auth-tab-btn link" data-tab="login">Login</button></p>
+    </form>
+  </div>
+</div>
+
+<header><div class="w bar">
+  <a class="logo" href="../index.html" aria-label="Yuvantara Venture home"><img class="logo-img" src="../assets/images/logo-mark-light.png" alt="" width="32" height="44"><span class="logo-text">Yuvantara<small>Venture</small></span></a>
+  <button class="burger" aria-label="Menu">Menu</button>
+  <nav class="nav">
+    <a href="../internships/index.html">Internships</a>
+    <details class="dd mg"><summary>Solutions</summary><div class="menu mega"><div><h4><a href="../cybersecurity-solutions/index.html">Cybersecurity Solutions</a></h4><a href="../cybersecurity-solutions/endpoint-security/index.html">Endpoint Security<small>EDR, antivirus &amp; device hardening</small></a><a href="../cybersecurity-solutions/network-security/index.html">Network Security<small>Firewalls, IPS &amp; segmentation</small></a><a href="../cybersecurity-solutions/siem/index.html">SIEM<small>Log collection &amp; correlation</small></a><a href="../cybersecurity-solutions/email-security/index.html">Email Security<small>Phishing &amp; malware defence</small></a><a href="../cybersecurity-solutions/vulnerability-management/index.html">Vulnerability Management<small>Scanning &amp; patch priority</small></a></div><div><h4><a href="../it-infrastructure-solutions/index.html">IT Infrastructure Solutions</a></h4><a href="../it-infrastructure-solutions/unified-endpoint-management/index.html">Unified Endpoint Management<small>Control &amp; deploy devices</small></a><a href="../it-infrastructure-solutions/cloud-infrastructure-hosting/index.html">Cloud Infrastructure<small>Cloud hosting &amp; migration</small></a><a href="../it-infrastructure-solutions/enterprise-networking/index.html">Enterprise Networking<small>Switching &amp; SD-WAN</small></a><a href="../it-infrastructure-solutions/backup-disaster-recovery/index.html">Backup &amp; Recovery<small>Immutable reliable backup</small></a></div><div><h4><a href="../managed-services/index.html">Managed Services</a></h4><a href="../managed-services/managed-it-services/index.html">Managed IT Services<small>Service desk &amp; support</small></a><a href="../managed-services/managed-cybersecurity/index.html">Managed Cybersecurity<small>Round-the-clock SOC defense</small></a><a href="../managed-services/soc-implementation/index.html">SOC Implementation<small>Build your own SOC</small></a></div></div></details>
+    <details class="dd"><summary>Resources</summary><div class="menu"><a href="../blog/index.html">Blog<small>Technical guides</small></a><a href="../case-studies/index.html">Case Studies<small>Real engagements</small></a><a href="../verify-certificate/index.html">Verify Certificate<small>Instant credential authentication</small></a><a href="../use-cases/index.html">Use Cases<small>Problems we solve</small></a><a href="../resources/downloads/index.html">Downloads<small>Brochures &amp; datasheets</small></a></div></details>
+    <details class="dd"><summary>About</summary><div class="menu"><a href="../about/index.html">Our Company<small>Who we are</small></a><a href="../about/certifications/index.html">Certifications<small>ISO 9001 standard</small></a><a href="../careers/index.html">Careers<small>Join our team</small></a></div></details>
+    <a href="../support/index.html">Support</a>
+    <span class="admin-badge">Admin Clearance</span>
+  </nav>
+</div></header>
+
+<main class="portal-wrap" id="main">
+  <div class="portal-container">
+
+    <!-- ═══ STATE A: ADMIN LOGIN GATE (UNAUTHENTICATED) ═══ -->
+    <div id="admin-login-view" style="display:none;max-width:480px;margin:50px auto">
+      <div class="pcard" style="border:1px solid #CBD5E1;box-shadow:0 20px 40px rgba(15,23,42,.08)">
+        <div style="text-align:center;margin-bottom:24px">
+          <div style="width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,#DC2626,#991B1B);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px;box-shadow:0 8px 20px rgba(220,38,38,.3)">🛡️</div>
+          <span class="admin-badge">Executive Security Console</span>
+          <h2 style="font-size:1.5rem;color:#0F172A;margin:10px 0 6px">Admin Portal Login</h2>
+          <p style="color:#64748B;font-size:.88rem;margin:0">Authentication required for Yuvantara Management Console.</p>
+        </div>
+
+        <div class="alert-box" id="admin-gate-alert"></div>
+
+        <form id="admin-login-form" class="portal-form">
+          <div>
+            <label for="adm-email">Administrator Email</label>
+            <input id="adm-email" type="email" placeholder="Admin ID / email" required autocomplete="email">
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <label for="adm-pass" style="margin:0">Master Password</label>
+              <a href="#" id="sa-forgot-link" style="font-size:.82rem;color:#DC2626;text-decoration:none">Forgot password?</a>
+            </div>
+            <input id="adm-pass" type="password" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;font-size:.85rem;color:#64748B">
+            <span>Session: Localhost &amp; GitHub Pages</span>
+            <span>256-bit AES</span>
+          </div>
+          <button class="btn p" style="background:#DC2626;border-color:#DC2626;width:100%;margin-top:8px" type="submit">Authenticate as Admin</button>
+        </form>
+
+        <!-- Super Admin password reset by email OTP -->
+        <div id="sa-reset-panel" style="display:none;margin-top:18px;border-top:1px solid #E2E8F0;padding-top:16px">
+          <h3 style="margin:0 0 4px;font-size:1.05rem;color:#0F172A">🔑 Reset Super Admin password</h3>
+          <p style="margin:0 0 12px;color:#64748B;font-size:.84rem;line-height:1.5">We email a 6-digit code to the Super Admin address. Other administrators: ask the Super Admin to change your password from the console.</p>
+          <div class="alert-box" id="sa-reset-alert"></div>
+
+          <div id="sa-step-1" class="portal-form">
+            <div><label for="sa-email">Super Admin email</label>
+              <input id="sa-email" type="email" placeholder="Super Admin email" autocomplete="email"></div>
+            <button class="btn p" id="sa-send" type="button" style="background:#DC2626;border-color:#DC2626;width:100%">Send verification code</button>
+          </div>
+
+          <div id="sa-step-2" class="portal-form" style="display:none">
+            <div><label for="sa-code">6-digit code from your email</label>
+              <input id="sa-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••" autocomplete="one-time-code" style="letter-spacing:.4rem;text-align:center;font-size:1.2rem"></div>
+            <div><label for="sa-new">New password <span style="color:#94A3B8;font-weight:400">(min 10 characters, letters + a number)</span></label>
+              <input id="sa-new" type="password" autocomplete="new-password"></div>
+            <div><label for="sa-new2">Confirm new password</label>
+              <input id="sa-new2" type="password" autocomplete="new-password"></div>
+            <button class="btn p" id="sa-confirm" type="button" style="background:#DC2626;border-color:#DC2626;width:100%">Set new password</button>
+            <div style="display:flex;justify-content:space-between;margin-top:6px">
+              <button type="button" id="sa-resend" class="btn" style="padding:6px 10px;font-size:.82rem" disabled>Resend code</button>
+              <button type="button" id="sa-cancel" class="btn" style="padding:6px 10px;font-size:.82rem">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STATE B: ADMIN COMMAND CENTER (AUTHENTICATED) ═══ -->
+    <div id="admin-dashboard-view" style="display:none">
+      <!-- Admin Header Card -->
+      <div class="portal-header-card admin-card-header">
+        <div class="portal-user-info">
+          <div class="portal-avatar" style="background:linear-gradient(135deg,#DC2626,#991B1B);box-shadow:0 4px 14px rgba(220,38,38,.4)">AD</div>
+          <div class="portal-user-meta">
+            <h2>Yuvantara Executive Administration</h2>
+            <p>
+              <span class="admin-badge">Super Admin Console</span>
+              <span>📍 Patna, Bihar Headquarters</span>
+              <span>🔑 Level 4 Management Access</span>
+            </p>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn" id="btn-cloud-sync" style="background:#0284C7;border-color:#0284C7;color:#fff">☁️ Sync Cloud DB</button>
+          <button class="btn" id="btn-export-backup" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff">💾 Export JSON Data</button>
+          <button class="btn" id="btn-export-sheet" style="background:#16A34A;border-color:#16A34A;color:#fff">📊 Download Data Sheet (Excel)</button>
+          <button class="btn" id="btn-admin-logout" style="background:#DC2626;border-color:#DC2626;color:#fff">Sign Out</button>
+        </div>
+      </div>
+
+      <!-- KPI Summary Row (3 DB Categories + 7 Replicas) -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <small>1. New Registrations</small>
+          <div class="kpi-num" id="kpi-new-regs" style="color:#D97706">0</div>
+          <span>Awaiting Authority Verification</span>
+        </div>
+        <div class="kpi-card">
+          <small>2. Current Interns</small>
+          <div class="kpi-num" id="kpi-current-interns" style="color:#2563EB">0</div>
+          <span>Active Verified Candidates</span>
+        </div>
+        <div class="kpi-card">
+          <small>3. All Employees</small>
+          <div class="kpi-num" id="kpi-all-employees" style="color:#059669">0</div>
+          <span>Graduates &amp; Certified Staff</span>
+        </div>
+        <div class="kpi-card">
+          <small>4. Single Master DB</small>
+          <div class="kpi-num" id="kpi-master-records" style="color:#7C3AED">0</div>
+          <span>Unified Master Storage (yuvantara_master_db)</span>
+        </div>
+      </div>
+
+      <!-- Admin Navigation Tabs: Explicitly 3 DB Categories + Audit -->
+      <nav class="portal-nav-bar" aria-label="Admin Navigation Tabs">
+        <a class="portal-tab-btn" href="issue-documents.html" style="text-decoration:none;color:#1B4283;font-weight:700"><span>📜</span> Issue Offer Letter &amp; Certificate</a>
+        <button class="portal-tab-btn active" data-admin-tab="new-registrations">
+          <span>📥</span> 1. New Registrations (<span id="tab-cnt-new-regs">0</span>)
+        </button>
+        <button class="portal-tab-btn" data-admin-tab="current-interns">
+          <span>👥</span> 2. Current Interns (<span id="tab-cnt-current-interns">0</span>)
+        </button>
+        <button class="portal-tab-btn" data-admin-tab="all-employees">
+          <span>💼</span> 3. All Employees (<span id="tab-cnt-all-employees">0</span>)
+        </button>
+        <button class="portal-tab-btn" data-admin-tab="payments">
+          <span>💳</span> Payments (<span id="tab-cnt-payments">0</span> unpaid)
+        </button>
+        <button class="portal-tab-btn" data-admin-tab="audit">
+          <span>📋</span> Audit Trail &amp; Authority Logs (<span id="tab-cnt-audit">0</span>)
+        </button>
+        <button class="portal-tab-btn" id="tab-btn-super-admins" data-admin-tab="super-admins" style="display:none;color:#DC2626;font-weight:700">
+          <span>👑</span> Admin Credentials (<span id="tab-cnt-admins">6</span>)
+        </button>
+        <button class="portal-tab-btn" data-admin-tab="data">
+          <span>⚙️</span> System Data &amp; Backup
+        </button>
+      </nav>
+
+      <!-- ── TAB 1: NEW REGISTRATIONS (CATEGORY 1) ── -->
+      <section class="portal-pane active" id="pane-new-registrations">
+        <!-- Cloud sync status -->
+        <div id="cloud-sync-strip" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:10px 16px;border-radius:10px;font-size:.85rem;border:1px solid #E2E8F0;background:#F8FAFC">
+          <span id="cloud-sync-text">Checking cloud sync…</span>
+          <button type="button" class="btn" id="btn-cloud-sync-now" style="font-size:.8rem;padding:6px 14px">🔄 Sync now</button>
+          <button type="button" class="btn" id="btn-cloud-diag" style="font-size:.8rem;padding:6px 14px">🩺 Diagnose</button>
+          <pre id="cloud-diag-out" style="display:none;width:100%;margin:6px 0 0;white-space:pre-wrap;font-size:.78rem;background:#fff;border:1px solid #E2E8F0;border-radius:8px;padding:10px"></pre>
+        </div>
+
+        <!-- Search pending users -->
+        <div class="pcard" style="margin-bottom:16px;padding:14px 18px">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+            <div style="flex:1;min-width:240px">
+              <label for="filter-reg-search" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">🔍 Search Pending Users</label>
+              <input type="text" id="filter-reg-search" placeholder="Search by name, email, phone, college, track, Reg ID..." autocomplete="off" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+            </div>
+            <div>
+              <label for="filter-reg-payment" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">Payment</label>
+              <select id="filter-reg-payment" style="padding:8px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+                <option value="all">All</option>
+                <option value="paid">Paid (awaiting access)</option>
+                <option value="unpaid">Unpaid</option>
+              </select>
+            </div>
+            <button type="button" class="btn" id="btn-reset-reg-filters" style="font-size:.82rem;padding:8px 14px">Reset</button>
+            <span id="reg-search-count" style="font-size:.82rem;color:#64748B;padding-bottom:8px"></span>
+          </div>
+        </div>
+
+        <div id="pending-enrollments-quickview" class="pcard" style="margin-bottom:24px;border:1.5px solid #FCD34D;background:#FFFDF7;box-shadow:0 4px 16px rgba(217,119,6,0.08)">
+          <div class="pcard-header" style="background:#FEF3C7;border-bottom:1px solid #FDE68A;padding:16px 20px;display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-size:1.4rem">⏳</span>
+              <div>
+                <h3 style="margin:0;color:#92400E;font-size:1.1rem;display:flex;align-items:center;gap:8px">
+                  Category 1: New Registrations
+                  <span id="pending-enrollments-badge" style="font-size:.78rem;background:#DC2626;color:#fff;padding:2px 8px;border-radius:99px;font-weight:700">0 New</span>
+                </h3>
+                <p style="margin:2px 0 0;color:#B45309;font-size:.85rem">New user registrations. When verified by authority, applicant is moved to <strong>Current Interns</strong>, the approving administrator is logged, and all 7 database replicas are updated simultaneously.</p>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn p" id="btn-add-student-modal">➕ Enroll New Candidate</button>
+            </div>
+          </div>
+          <div id="pending-enrollments-list" style="padding:16px 20px">
+            <!-- Dynamically populated quickview list -->
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="pcard-header">
+            <div>
+              <h3>New Registrations Queue</h3>
+              <p>Review incoming applicants. Click <strong>Verify &amp; Approve</strong> to grant authority and transition candidate to Current Interns across all 7 replicas.</p>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Reg ID</th>
+                  <th>Applicant Name</th>
+                  <th>Contact Info</th>
+                  <th>Track Applied For</th>
+                  <th>College &amp; Stream</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th style="text-align:right">Authority Action</th>
+                </tr>
+              </thead>
+              <tbody id="admin-new-regs-tbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB 2: CURRENT INTERNS (CATEGORY 2) ── -->
+      <section class="portal-pane" id="pane-current-interns">
+        <div class="pcard">
+          <div class="pcard-header">
+            <div>
+              <h3>Category 2: Current Interns Database</h3>
+              <p>Active verified interns who have received administrative authority. Monitor progress, toggle module completion, or graduate intern to <strong>All Employees</strong> with an official certificate.</p>
+            </div>
+          </div>
+
+          <!-- Filter & Search Toolbar -->
+          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:16px;margin:16px 0 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">
+            <div style="flex:1;min-width:180px">
+              <label for="filter-stu-timeframe" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">📅 Enrollment Timeframe</label>
+              <select id="filter-stu-timeframe" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+                <option value="all">All Time</option>
+                <option value="today">Today</option>
+                <option value="7days">Last 7 Days</option>
+                <option value="30days">Last 30 Days</option>
+                <option value="this_month">This Month</option>
+              </select>
+            </div>
+
+            <div style="flex:1;min-width:160px">
+              <label for="filter-stu-track" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">🎯 Track</label>
+              <select id="filter-stu-track" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+                <option value="all">All Tracks</option>
+                <option value="Cybersecurity &amp; SOC Operations">Cybersecurity &amp; SOC Operations</option>
+                <option value="Artificial Intelligence &amp; Machine Learning">AI &amp; Machine Learning</option>
+                <option value="Cloud Infrastructure &amp; DevOps">Cloud Infrastructure &amp; DevOps</option>
+                <option value="Python Full-Stack &amp; Automation">Python Full-Stack &amp; Automation</option>
+                <option value="Robotics &amp; IoT Embedded Systems">Robotics &amp; IoT</option>
+                <option value="Data Science &amp; Business Analytics">Data Science</option>
+              </select>
+            </div>
+
+            <div style="flex:1.5;min-width:200px">
+              <label for="filter-stu-search" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">🔍 Search Intern</label>
+              <input type="text" id="filter-stu-search" placeholder="Search by name, email, phone, ID..." style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+            </div>
+
+            <div>
+              <button class="btn sm" id="btn-reset-stu-filters" style="padding:8px 14px">Reset</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Intern ID</th>
+                  <th>Candidate Details</th>
+                  <th>College &amp; Stream</th>
+                  <th>Enrolled Track</th>
+                  <th>Progress</th>
+                  <th>Authority Verification</th>
+                  <th style="text-align:right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-current-interns-tbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB 3: ALL EMPLOYEES (CATEGORY 3) ── -->
+      <section class="portal-pane" id="pane-all-employees">
+        <div class="pcard">
+          <div class="pcard-header">
+            <div>
+              <h3>Category 3: All Employees &amp; Certified Staff</h3>
+              <p>Comprehensive repository of graduated interns and company personnel with official certificate numbers, roles, authority approvals, and instant verification links.</p>
+            </div>
+          </div>
+
+          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:16px;margin:16px 0 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">
+            <div style="flex:1.5;min-width:240px">
+              <label for="filter-emp-search" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">🔍 Search Employee / Certificate Number</label>
+              <input type="text" id="filter-emp-search" placeholder="Search by name, role, certificate ID..." style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Employee ID</th>
+                  <th>Employee Details</th>
+                  <th>Role &amp; Domain</th>
+                  <th>College / Institution</th>
+                  <th>Certificate Number</th>
+                  <th>Issue Date &amp; Grade</th>
+                  <th>Authorized By</th>
+                  <th style="text-align:right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-all-employees-tbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB 4: SYSTEM AUDIT LOG & AUTHORITY LOCKS ── -->
+      <!-- ── TAB: PAYMENT VERIFICATION ── -->
+      <section class="portal-pane" id="pane-payments">
+        <div style="background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:18px 20px;margin-bottom:16px">
+          <h3 style="margin:0 0 4px;color:#0F172A">💳 Payment Verification</h3>
+          <p style="margin:0 0 14px;color:#64748B;font-size:.88rem">Confirm a payment you have received, or reverse one. Status is always exactly <strong>Paid</strong> or <strong>Unpaid</strong>, and the student's invoice, portal and records update to match.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+            <div style="flex:2;min-width:220px">
+              <label for="filter-pay-search" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">🔍 Search</label>
+              <input type="text" id="filter-pay-search" placeholder="Name, email, phone, ID, payment reference..." style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+            </div>
+            <div style="flex:1;min-width:160px">
+              <label for="filter-pay-status" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">Payment status</label>
+              <select id="filter-pay-status" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+                <option value="all">All</option>
+                <option value="unpaid">Unpaid</option>
+                <option value="paid">Paid</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Candidate</th>
+                <th>Track</th>
+                <th>Account</th>
+                <th>Payment</th>
+                <th>Reference / Date</th>
+                <th style="text-align:right">Change status</th>
+              </tr>
+            </thead>
+            <tbody id="admin-payments-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="portal-pane" id="pane-audit">
+        <div class="pcard">
+          <div class="pcard-header">
+            <div>
+              <h3>📋 System Audit Trail &amp; Locked Authority Logs</h3>
+              <p>Every administrative action (verifying new registrations, graduating to employees, updating progress, deleting records) is cryptographically logged and attributed to the executing administrator.</p>
+            </div>
+            <button class="btn sm" id="btn-refresh-audit">🔄 Refresh Logs</button>
+          </div>
+
+          <!-- Filter Toolbar for Audit Log -->
+          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:16px;margin:16px 0 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">
+            <div style="flex:1;min-width:200px">
+              <label for="filter-audit-admin" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">👤 Filter By Admin</label>
+              <select id="filter-audit-admin" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+                <option value="all">All Administrators</option>
+                <option value="rocky7061patel@gmail.com">👑 rocky7061patel@gmail.com (Super Admin)</option>
+                <option value="adk_01@admin">🛡️ adk_01@admin</option>
+                <option value="alk_01@admin">🛡️ alk_01@admin</option>
+                <option value="dhb_03@admin">🛡️ dhb_03@admin</option>
+                <option value="abk_04@admin">🛡️ abk_04@admin</option>
+                <option value="anp_05@admin">🛡️ anp_05@admin</option>
+                <option value="rop_06@admin">🛡️ rop_06@admin</option>
+              </select>
+            </div>
+
+            <div style="flex:1;min-width:180px">
+              <label for="filter-audit-action" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">⚡ Action Type</label>
+              <select id="filter-audit-action" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+                <option value="all">All Action Types</option>
+                <option value="VERIFY_AND_AUTHORIZE_INTERN">Verify &amp; Authorize Intern</option>
+                <option value="GRADUATE_TO_ALL_EMPLOYEES">Graduate to All Employees</option>
+                <option value="DELETE_RECORD">Delete Record (Multi-Replica)</option>
+                <option value="ENROLL_STUDENT">Enroll Student Candidate</option>
+                <option value="UPDATE_PROGRESS">Progress Updated</option>
+                <option value="VERIFY_PAYMENT">Payment Verified / Changed</option>
+              </select>
+            </div>
+
+            <div style="flex:1.5;min-width:220px">
+              <label for="filter-audit-search" style="display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:4px;text-transform:uppercase">🔍 Search User / Details</label>
+              <input type="text" id="filter-audit-search" placeholder="Search target candidate, email, or remarks..." style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:.85rem;background:#fff">
+            </div>
+
+            <div>
+              <button class="btn sm" id="btn-reset-audit-filters" style="padding:8px 14px">Reset</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Responsible Administrator</th>
+                  <th>Action Performed</th>
+                  <th>Target Candidate / User</th>
+                  <th>Action Details &amp; Audit Verification</th>
+                </tr>
+              </thead>
+              <tbody id="admin-audit-tbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ── TAB 6: SUPER ADMIN ROSTER & CREDENTIAL MANAGEMENT ── -->
+      <section class="portal-pane" id="pane-super-admins">
+        <div class="pcard">
+          <div class="pcard-header">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:2rem">👑</span>
+              <div>
+                <h3 style="margin:0">Super Admin Command: Administrator Roster &amp; Credentials</h3>
+                <p style="margin:4px 0 0">Super Admin Exclusive Console: Change passwords, suspend privileges, or permanently revoke access for all 6 system administrators.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Administrator ID / Email</th>
+                  <th>Display Name</th>
+                  <th>Access Status</th>
+                  <th>Audit Activity</th>
+                  <th>Contact</th>
+                  <th style="text-align:right">Super Admin Control</th>
+                </tr>
+              </thead>
+              <tbody id="super-admin-roster-tbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB 7: SYSTEM DATA & BACKUP ── -->
+      <section class="portal-pane" id="pane-data">
+        <div class="pcard">
+          <div class="pcard-header">
+            <div>
+              <h3>System Data Management &amp; Persistence</h3>
+              <p>Export JSON backups or an Excel data sheet, restore records, or reset all user data.</p>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:28px">
+            <div style="border:1px solid #E2E8F0;border-radius:12px;padding:24px;background:#F8FAFC">
+              <h4 style="margin:0 0 8px;color:#0F172A">📥 Download Complete Backup</h4>
+              <p style="color:#64748B;font-size:.88rem;margin:0 0 16px">Export all 3 categories (New Registrations, Current Interns, All Employees) and Audit Logs as a clean JSON file.</p>
+              <button class="btn p" id="btn-download-json">Download JSON Backup</button>
+            </div>
+
+            <div style="border:1px solid #BBF7D0;border-radius:12px;padding:24px;background:#F0FDF4">
+              <h4 style="margin:0 0 8px;color:#15803D">📊 Download User Data Sheet</h4>
+              <p style="color:#166534;font-size:.88rem;margin:0 0 16px">One row per user (name, email, phone, date of birth, course, college, payment and approval status). Opens directly in Excel / Google Sheets. Password data is never included.</p>
+              <button class="btn p" id="btn-download-sheet" style="background:#16A34A;border-color:#16A34A">Download Excel Sheet (.csv)</button>
+            </div>
+
+            <div style="border:1px solid #E2E8F0;border-radius:12px;padding:24px;background:#F8FAFC">
+              <h4 style="margin:0 0 8px;color:#0F172A">📤 Restore from JSON</h4>
+              <p style="color:#64748B;font-size:.88rem;margin:0 0 16px">Upload a previously exported Yuvantara JSON file to restore all records.</p>
+              <input type="file" id="json-restore-input" accept=".json" style="display:none">
+              <button class="btn" id="btn-restore-json">Select Backup File</button>
+            </div>
+
+            <div style="border:1px solid #BFDBFE;border-radius:12px;padding:24px;background:#EFF6FF">
+              <h4 style="margin:0 0 8px;color:#1D4ED8">🗂️ Data Backups</h4>
+              <p style="color:#1E40AF;font-size:.88rem;margin:0">Replica JSON files are no longer served publicly because they contain personal data and password hashes. Use <strong>Download Backup</strong> above to export the current database, and keep the file private.</p>
+            </div>
+
+            <div style="border:1px solid #FCA5A5;border-radius:12px;padding:24px;background:#FEF2F2">
+              <h4 style="margin:0 0 8px;color:#DC2626">⚠️ Reset ALL User Data</h4>
+              <p style="color:#991B1B;font-size:.88rem;margin:0 0 16px">Super Admin only. Permanently deletes every student account, application, payment record and progress entry from this portal and from the shared cloud database. Administrator accounts are kept. Download a backup first.</p>
+              <button class="btn" id="btn-reset-demo" style="background:#DC2626;border-color:#DC2626;color:#fff">Reset ALL User Data</button>
+            </div>
+          </div>
+
+          <h4 style="margin:0 0 10px;color:#0F172A">Live LocalStorage Database Preview</h4>
+          <pre id="raw-json-viewer" style="background:#0F172A;color:#38BDF8;padding:20px;border-radius:10px;overflow:auto;max-height:400px;font-size:.82rem"></pre>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</main>
+
+<!-- ═══ MODAL: EDIT STUDENT PROGRESS ═══ -->
+<div class="modal-overlay" id="modal-progress-overlay"></div>
+<div class="modal-box" id="modal-progress">
+  <div class="modal-header">
+    <h3>Update Student Internship Progress</h3>
+    <button class="modal-close" data-close-modal="progress">✕</button>
+  </div>
+  <form id="form-edit-progress" class="portal-form">
+    <input type="hidden" id="prog-stu-email">
+    <div>
+      <label>Student Name</label>
+      <input type="text" id="prog-stu-name" readonly>
+    </div>
+    <div>
+      <label for="prog-range-input">Progress Percentage: <b id="prog-range-val" style="color:var(--ac);font-size:1.1rem">75%</b></label>
+      <input type="range" id="prog-range-input" min="0" max="100" step="5" value="75" style="width:100%">
+    </div>
+
+    <label style="margin-top:10px;display:block">Curriculum Modules Status</label>
+    <div id="prog-modules-container" style="display:flex;flex-direction:column;gap:8px">
+      <!-- Dynamically generated checkboxes -->
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px">
+      <button type="button" class="btn" data-close-modal="progress">Cancel</button>
+      <button type="submit" class="btn p">Save Progress</button>
+    </div>
+  </form>
+</div>
+
+<!-- ═══ MODAL: GRADUATE INTERN TO ALL EMPLOYEES & ISSUE CERTIFICATE ═══ -->
+<div class="modal-overlay" id="modal-cert-overlay"></div>
+<div class="modal-box" id="modal-cert">
+  <div class="modal-header">
+    <h3>🎓 Graduate Intern to Employee &amp; Issue Certificate</h3>
+    <button class="modal-close" data-close-modal="cert">✕</button>
+  </div>
+  <form id="form-issue-cert" class="portal-form">
+    <input type="hidden" id="cert-stu-email">
+    <div>
+      <label>Candidate Name</label>
+      <input type="text" id="cert-stu-name" readonly style="background:#F8FAFC;font-weight:700;color:#0F172A">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div>
+        <label for="cert-input-id">Certificate ID (e.g. YUV-2026-CS101)</label>
+        <input type="text" id="cert-input-id" required placeholder="YUV-2026-CS101">
+      </div>
+      <div>
+        <label for="cert-input-role">Employee Role / Title</label>
+        <input type="text" id="cert-input-role" required placeholder="Junior SOC Analyst">
+      </div>
+    </div>
+    <div>
+      <label for="cert-input-title">Certification Track / Domain</label>
+      <input type="text" id="cert-input-title" required>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div>
+        <label for="cert-input-duration">Duration</label>
+        <input type="text" id="cert-input-duration" value="6 Months (Jan 2026 – Jun 2026)">
+      </div>
+      <div>
+        <label for="cert-input-grade">Grade / Honors</label>
+        <input type="text" id="cert-input-grade" value="Grade A+ (Distinction)">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div>
+        <label for="cert-input-date">Issue Date</label>
+        <input type="text" id="cert-input-date">
+      </div>
+      <div>
+        <label for="cert-input-authority">Issuing Authority</label>
+        <input type="text" id="cert-input-authority" value="Yuvantara Academic &amp; Cyber Defense Council">
+      </div>
+    </div>
+    <div>
+      <small style="color:#059669;display:block;margin-top:4px">⭐ On submission, intern is graduated into the <strong>All Employees</strong> category and all 7 database replicas are updated simultaneously.</small>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px">
+      <button type="button" class="btn" data-close-modal="cert">Cancel</button>
+      <button type="submit" class="btn p" style="background:#059669;border-color:#059669">Graduate to Employee &amp; Issue Certificate</button>
+    </div>
+  </form>
+</div>
+
+<!-- ═══ MODAL: ENROLL NEW STUDENT ═══ -->
+<div class="modal-overlay" id="modal-enroll-overlay"></div>
+<div class="modal-box" id="modal-enroll">
+  <div class="modal-header">
+    <h3>Enroll New Student Candidate</h3>
+    <button class="modal-close" data-close-modal="enroll">✕</button>
+  </div>
+  <form id="form-enroll-student" class="portal-form">
+    <div>
+      <label for="new-stu-name">Full Name</label>
+      <input type="text" id="new-stu-name" required placeholder="e.g. Anand Roy">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div>
+        <label for="new-stu-email">Email Address</label>
+        <input type="email" id="new-stu-email" required placeholder="student@example.com">
+      </div>
+      <div>
+        <label for="new-stu-phone">Phone / WhatsApp</label>
+        <input type="tel" id="new-stu-phone" required placeholder="+91 98765 43210">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div>
+        <label for="new-stu-dob">Date of Birth</label>
+        <input type="date" id="new-stu-dob" required max="2010-01-01">
+      </div>
+      <div>
+        <label for="new-stu-pass">Initial Password</label>
+        <input type="text" id="new-stu-pass" value="student123" required>
+      </div>
+    </div>
+    <div>
+      <label for="new-stu-track">Internship Track</label>
+      <select id="new-stu-track" required>
+        <option>Cybersecurity &amp; SOC Operations</option>
+        <option>Artificial Intelligence &amp; Machine Learning</option>
+        <option>Cloud Infrastructure &amp; DevOps</option>
+        <option>Python Full-Stack &amp; Automation</option>
+        <option>Robotics &amp; IoT Embedded Systems</option>
+        <option>Data Science &amp; Business Analytics</option>
+      </select>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div>
+        <label for="new-stu-college">College / University</label>
+        <input type="text" id="new-stu-college" placeholder="NIT Patna" required>
+      </div>
+      <div>
+        <label for="new-stu-stream">Stream / Degree</label>
+        <input type="text" id="new-stu-stream" placeholder="B.Tech CSE" required>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px">
+      <button type="button" class="btn" data-close-modal="enroll">Cancel</button>
+      <button type="submit" class="btn p">Enroll Candidate</button>
+    </div>
+  </form>
+</div>
+
+<!-- ═══ MODAL: SUPER ADMIN CHANGE ADMIN PASSWORD ═══ -->
+<div class="modal-overlay" id="modal-admin-pass-overlay"></div>
+<div class="modal-box" id="modal-admin-pass">
+  <div class="modal-header">
+    <h3>🔑 Reset Administrator Password</h3>
+    <button class="modal-close" data-close-modal="admin-pass">✕</button>
+  </div>
+  <form id="form-change-admin-pass" class="portal-form">
+    <div>
+      <label>Target Administrator (Locked)</label>
+      <input type="text" id="target-admin-email" readonly style="background:#F8FAFC;font-weight:700;color:#0F172A">
+    </div>
+    <div>
+      <label for="new-admin-password">New Password for Administrator</label>
+      <input type="text" id="new-admin-password" required placeholder="Enter new password (min 6 characters)" minlength="6">
+      <small style="color:#64748B;margin-top:4px;display:block">Takes effect immediately. The admin must use this password on next login.</small>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px">
+      <button type="button" class="btn" data-close-modal="admin-pass">Cancel</button>
+      <button type="submit" class="btn p" style="background:#DC2626;border-color:#DC2626">Update Password</button>
+    </div>
+  </form>
+</div>
+
+<footer><div class="w">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3><i></i>Yuvantara</h3>
+      <p>Empowering students and technology teams through advanced industrial internships, enterprise cybersecurity, and robust IT infrastructure solutions.</p>
+      <div class="footer-contact-item"><i>📍</i><span>Lekha Nagar, Saguna More, Patna, Bihar</span></div>
+      <div class="footer-contact-item"><i>✉️</i><a href="mailto:yuvantara@yuvantaraventure.com">yuvantara@yuvantaraventure.com</a></div>
+      <div class="footer-contact-item"><i>📞</i><a href="tel:+919876543210">+91 98765 43210</a></div>
+    </div>
+    <div class="footer-col">
+      <h4>Internship Programs</h4>
+      <a href="../internships/index.html" data-auth="signup" data-course="Cybersecurity &amp; SOC Operations">Cybersecurity &amp; SOC</a>
+      <a href="../internships/index.html" data-auth="signup" data-course="Artificial Intelligence &amp; Machine Learning">AI &amp; Machine Learning</a>
+      <a href="../internships/index.html" data-auth="signup" data-course="Cloud Infrastructure &amp; DevOps">Cloud Infrastructure &amp; DevOps</a>
+      <a href="../internships/index.html" data-auth="signup" data-course="Python Full-Stack &amp; Automation">Python Full-Stack &amp; Automation</a>
+      <a href="../internships/index.html" data-auth="signup" data-course="Robotics &amp; IoT Embedded Systems">Robotics, IoT &amp; Embedded</a>
+      <a href="../internships/index.html">View All 22+ Programs →</a>
+    </div>
+    <div class="footer-col">
+      <h4>Technology Solutions</h4>
+      <a href="../cybersecurity-solutions/index.html">Cybersecurity Solutions</a>
+      <a href="../cybersecurity-solutions/network-security/index.html">Network Security &amp; Firewalls</a>
+      <a href="../it-infrastructure-solutions/index.html">IT Infrastructure Solutions</a>
+      <a href="../managed-services/index.html">Managed IT Services</a>
+      <a href="../managed-services/soc-implementation/index.html">SOC Implementation</a>
+      <a href="../about/certifications/index.html">ISO 9001 Quality</a>
+    </div>
+    <div class="footer-col">
+      <h4>Admin &amp; Verification</h4>
+      <a href="../verify-certificate/index.html">Verify Certificate</a>
+      <a href="../internships/index.html">Internship Catalog</a>
+      <a href="../portal/index.html">Student Portal</a>
+      <a href="index.html">Admin Command Center</a>
+      <a href="../careers/index.html">Careers &amp; Mentorship</a>
+      <a href="../contact/index.html">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2026 Yuvantara. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="../privacy-policy/index.html">Privacy Policy</a>
+      <a href="../terms/index.html">Terms of Use</a>
+      <a href="../verify-certificate/index.html">Verify Certificate</a>
+      <a href="../sitemap/index.html">Sitemap</a>
+    </div>
+  </div>
+</div></footer>
+
+<script src="../assets/config.js?v=20261127c"></script>
+<script src="../assets/db.js?v=20261127c"></script>
+<script src="../assets/cloud-db.js?v=20261127c"></script>
+<script src="../assets/site.js?v=20261127c"></script>
+<script src="../assets/header.js?v=20261127c"></script>
+<script src="../assets/footer.js?v=20261127c"></script>
+<script src="admin.js?v=20261127c"></script>
+</body></html>

@@ -1,0 +1,651 @@
+﻿<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0A0E17"><title>Cybersecurity, IT Solutions &amp; Internship Training | Yuvantara</title><link rel="stylesheet" href="assets/style.css?v=20261127c"><link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png">
+<link rel="shortcut icon" href="assets/images/favicon.ico">
+<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+<meta name="theme-color" content="#0A0E17">
+<meta property="og:image" content="https://yuvantaraventure.com/assets/images/og-image.png">
+<meta name="twitter:image" content="https://yuvantaraventure.com/assets/images/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Yuvantara Venture","url":"https://yuvantaraventure.com","logo":"https://yuvantaraventure.com/assets/images/logo.png","email":"yuvantara@yuvantaraventure.com","telephone":"+919876543210","address":{"@type":"PostalAddress","streetAddress":"Lekha Nagar, Saguna More","addressLocality":"Patna","addressRegion":"Bihar","addressCountry":"IN"}}</script>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ═══ AUTH MODAL ═══ -->
+<div id="auth-overlay" class="auth-overlay" aria-hidden="true"></div>
+<div id="auth-modal" class="auth-modal" role="dialog" aria-modal="true" aria-label="Login or Sign up" aria-hidden="true">
+  <button class="auth-close" aria-label="Close">✕</button>
+  <div class="auth-tabs">
+    <button class="auth-tab-btn active" data-tab="login">Login</button>
+    <button class="auth-tab-btn" data-tab="signup">Apply / Sign Up</button>
+  </div>
+
+  <!-- LOGIN PANE -->
+  <div class="auth-pane active" data-pane="login">
+    <h2 class="auth-title">Welcome back</h2>
+    <p class="auth-sub">Log in to your Yuvantara student portal</p>
+    <form id="form-login" class="auth-form" novalidate>
+      <div class="fgroup">
+        <label for="l-email">Email address</label>
+        <input id="l-email" type="email" placeholder="you@example.com" required autocomplete="email">
+      </div>
+      <div class="fgroup">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <label for="l-pass" style="margin:0">Password</label>
+          <a href="forgot-password/index.html" style="font-size:.82rem;color:var(--ac);text-decoration:none">Forgot password?</a>
+        </div>
+        <input id="l-pass" type="password" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+
+      <button class="btn p auth-submit" type="submit">Login</button>
+      <p class="auth-switch">Don't have an account? <button type="button" class="auth-tab-btn link" data-tab="signup">Sign up</button></p>
+    </form>
+  </div>
+
+  <!-- SIGNUP / INTERNSHIP APPLICATION PANE -->
+  <div class="auth-pane" data-pane="signup">
+    <h2 class="auth-title">Apply for Internship</h2>
+    <p class="auth-sub">Join the Yuvantara industrial training program</p>
+    <form id="form-signup" class="auth-form" novalidate>
+      <div class="fgroup">
+        <label for="s-name">Full name</label>
+        <input id="s-name" type="text" placeholder="Your full name" required autocomplete="name">
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label for="s-email">Email address</label>
+          <input id="s-email" type="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="fgroup">
+          <label for="s-phone">WhatsApp / Phone</label>
+          <input id="s-phone" type="tel" placeholder="+91 98765 43210" required>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label for="s-dob">Date of Birth</label>
+          <input id="s-dob" type="date" required max="2010-01-01">
+        </div>
+        <div class="fgroup">
+          <label for="s-pass">Password</label>
+          <input id="s-pass" type="password" placeholder="Create password" required autocomplete="new-password">
+        </div>
+      </div>
+      <div class="fgroup">
+        <label for="s-pass-confirm">Confirm Password</label>
+        <input id="s-pass-confirm" type="password" placeholder="Confirm your password" required autocomplete="new-password">
+      </div>
+      <div class="frow">
+        <div class="fgroup" style="display:none">
+          <label for="s-prog">Internship Track</label>
+          <select id="s-prog">
+            <option value="">Select track</option>
+            <option>Cybersecurity &amp; SOC Operations</option>
+            <option>Artificial Intelligence &amp; Machine Learning</option>
+            <option>Cloud Infrastructure &amp; DevOps</option>
+            <option>Python Full-Stack &amp; Automation</option>
+            <option>Robotics &amp; IoT Embedded Systems</option>
+            <option>Data Science &amp; Business Analytics</option>
+            <option>Full-Stack Web Development (MERN)</option>
+            <option>Embedded Systems &amp; VLSI Design</option>
+            <option>Other Specialized Program</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label for="s-stream">Stream / Degree</label>
+          <select id="s-stream" required>
+            <option value="">Select stream</option>
+            <option>B.Tech / B.E (CSE, IT, ECE, EE, Mech)</option>
+            <option>MCA / M.Tech</option>
+            <option>BCA / B.Sc Computer Science</option>
+            <option>Diploma in Engineering</option>
+            <option>Other Graduate / Post Graduate</option>
+          </select>
+        </div>
+      </div>
+      <div class="fgroup">
+        <label for="s-college">College / University name</label>
+        <input id="s-college" type="text" placeholder="e.g. Jadavpur University" required>
+      </div>
+      <div class="fgroup checkbox-group" style="margin:10px 0 12px">
+        <label style="display:flex;align-items:flex-start;gap:8px;font-size:0.83rem;color:#334155;cursor:pointer;line-height:1.4">
+          <input type="checkbox" id="s-declaration" required style="margin-top:2px;accent-color:#0284C7;width:16px;height:16px;flex-shrink:0">
+          <span><strong>Self-Declaration:</strong> I hereby declare that all details provided are genuine and accurate. I agree to abide by Yuvantara Corporate Policies and IT Act compliance.</span>
+        </label>
+      </div>
+
+      <button class="btn p auth-submit" type="submit">Submit Application &amp; Proceed to Cart →</button>
+      <p class="auth-switch">Already have an account? <button type="button" class="auth-tab-btn link" data-tab="login">Login</button></p>
+    </form>
+  </div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header><div class="w bar">
+  <a class="logo" href="index.html" aria-label="Yuvantara Venture home"><img class="logo-img" src="assets/images/logo-mark-light.png" alt="" width="32" height="44"><span class="logo-text">Yuvantara<small>Venture</small></span></a>
+  <button class="burger" aria-label="Menu">Menu</button>
+  <nav class="nav">
+    <a href="internships/index.html">Internships</a>
+    <details class="dd mg"><summary>Solutions</summary><div class="menu mega"><div><h4><a href="cybersecurity-solutions/index.html">Cybersecurity Solutions</a></h4><a href="cybersecurity-solutions/endpoint-security/index.html">Endpoint Security<small>EDR, antivirus &amp; device hardening</small></a><a href="cybersecurity-solutions/network-security/index.html">Network Security<small>Firewalls, IPS &amp; segmentation</small></a><a href="cybersecurity-solutions/siem/index.html">SIEM<small>Log collection &amp; correlation</small></a><a href="cybersecurity-solutions/email-security/index.html">Email Security<small>Phishing &amp; malware defence</small></a><a href="cybersecurity-solutions/vulnerability-management/index.html">Vulnerability Management<small>Scanning &amp; patch priority</small></a></div><div><h4><a href="it-infrastructure-solutions/index.html">IT Infrastructure Solutions</a></h4><a href="it-infrastructure-solutions/unified-endpoint-management/index.html">Unified Endpoint Management<small>Control &amp; deploy devices</small></a><a href="it-infrastructure-solutions/cloud-infrastructure-hosting/index.html">Cloud Infrastructure<small>Cloud hosting &amp; migration</small></a><a href="it-infrastructure-solutions/enterprise-networking/index.html">Enterprise Networking<small>Switching &amp; SD-WAN</small></a><a href="it-infrastructure-solutions/backup-disaster-recovery/index.html">Backup &amp; Recovery<small>Immutable reliable backup</small></a></div><div><h4><a href="managed-services/index.html">Managed Services</a></h4><a href="managed-services/managed-it-services/index.html">Managed IT Services<small>Service desk &amp; support</small></a><a href="managed-services/managed-cybersecurity/index.html">Managed Cybersecurity<small>Round-the-clock SOC defense</small></a><a href="managed-services/soc-implementation/index.html">SOC Implementation<small>Build your own SOC</small></a></div></div></details>
+    <details class="dd"><summary>Resources</summary><div class="menu"><a href="blog/index.html">Blog<small>Technical guides</small></a><a href="case-studies/index.html">Case Studies<small>Real engagements</small></a><a href="verify-certificate/index.html">Verify Certificate<small>Instant credential authentication</small></a><a href="use-cases/index.html">Use Cases<small>Problems we solve</small></a><a href="resources/downloads/index.html">Downloads<small>Brochures &amp; datasheets</small></a></div></details>
+    <details class="dd"><summary>About</summary><div class="menu"><a href="about/index.html">Our Company<small>Who we are</small></a><a href="about/certifications/index.html">Certifications<small>ISO 9001 standard</small></a><a href="careers/index.html">Careers<small>Join our team</small></a></div></details>
+    <a href="support/index.html">Support</a>
+    <button class="btn p" style="margin:0 0 0 8px;padding:9px 18px" data-auth="signup">Apply for Internship</button>
+    <button class="btn" style="margin:0 0 0 4px;padding:9px 16px" data-auth="login">Login</button>
+  </nav>
+</div></header>
+
+<main id="main">
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero"><div class="w">
+  <div class="badges"><span>ISO 9001:2015 certified</span><span>MSME registered</span><span>Since 2015</span></div>
+  <h1>We <span class="gt">secure, build and empower</span> the technology workforce &amp; business operations.</h1>
+  <p class="lead">Yuvantara is an independent technology organisation in Patna, Bihar delivering enterprise cybersecurity, IT infrastructure solutions, and premier industrial internship programs with verifiable credentials.</p>
+  <div class="acts">
+    <button class="btn p" data-auth="signup">Apply for Internship Programme</button>
+    <a class="btn" href="contact/index.html">Send Enquiry</a>
+  </div>
+</div></section>
+
+<!-- ═══════════════ KEY STATS ═══════════════ -->
+<section style="padding:32px 0"><div class="w"><div class="stat-strip">
+  <div><b>2015</b><span>Founded</span></div>
+  <div><b>ISO 9001</b><span>Certified</span></div>
+  <div><b>MSME</b><span>Registered</span></div>
+  <div><b>10,000+</b><span>Students &amp; Interns</span></div>
+  <div><b>24 × 7</b><span>Cyber Defense</span></div>
+</div></div></section>
+
+<!-- ═══════════════ PREMIER INTERNSHIP TRACKS (EXACTLY 9 CARDS) ═══════════════ -->
+<section id="internships" class="alt"><div class="w">
+  <span class="tag">Industrial Training 2026</span>
+  <h2>Premier Internship &amp; Skill Development Tracks</h2>
+  <p class="lead">Bridge the gap between academia and real corporate IT. Work on live security simulations, production codebases, and scalable infrastructure under direct engineering mentorship.</p>
+
+  <div class="intern-grid">
+    <!-- Card 1: Cybersecurity -->
+    <div class="intern-card">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="assets/images/cyber.jpg" alt="Cybersecurity &amp; SOC" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-cyber">Cybersecurity &amp; SOC</span>
+        <h3>Cybersecurity &amp; SOC Defense</h3>
+        <p>Hands-on exposure to network packet analysis, SIEM tools, vulnerability scanning, threat hunting, and ethical hacking protocols.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 B.Tech / BCA / MCA</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Cybersecurity &amp; SOC Operations">Apply for this Track</button>
+      </div>
+    </div>
+
+    <!-- Card 2: AI & ML -->
+    <div class="intern-card">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="assets/images/ai.jpg" alt="AI &amp; Machine Learning" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-ai">Artificial Intelligence</span>
+        <h3>AI &amp; Machine Learning</h3>
+        <p>Build end-to-end data pipelines, train machine learning models, implement computer vision and natural language processing applications.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 Engineering / Science</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Artificial Intelligence &amp; Machine Learning">Apply for this Track</button>
+      </div>
+    </div>
+
+    <!-- Card 3: Cloud & DevOps -->
+    <div class="intern-card">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="assets/images/automation.jpg" alt="Cloud Infrastructure &amp; DevOps" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-cloud">Cloud Computing</span>
+        <h3>Cloud Infrastructure &amp; DevOps</h3>
+        <p>Deploy cloud native workloads on AWS and Azure, automate infrastructure as code, containerize with Docker, and configure CI/CD pipelines.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 All Tech Streams</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Cloud Infrastructure &amp; DevOps">Apply for this Track</button>
+      </div>
+    </div>
+
+    <!-- Card 4: Python Full-Stack -->
+    <div class="intern-card">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="assets/images/python.jpg" alt="Python Full-Stack &amp; Automation" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-code">Programming</span>
+        <h3>Python Full-Stack &amp; Automation</h3>
+        <p>Master clean object-oriented Python, backend API design with FastAPI/Django, web automation, databases, and enterprise scripting.</p>
+        <div class="intern-meta">
+          <span>⏱️ 1 / 3 / 6 Months</span>
+          <span>🎓 Beginners &amp; Advanced</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Python Full-Stack &amp; Automation">Apply for this Track</button>
+      </div>
+    </div>
+
+    <!-- Card 5: Robotics & IoT -->
+    <div class="intern-card">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="assets/images/robotics.jpg" alt="Robotics &amp; IoT Embedded Systems" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-iot">Hardware &amp; IoT</span>
+        <h3>Robotics &amp; IoT Embedded Systems</h3>
+        <p>Design micro-controller circuits with Arduino &amp; Raspberry Pi, integrate telemetry sensors, write C/C++ firmware, and connect to cloud IoT.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 ECE / EE / Mech / CSE</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Robotics &amp; IoT Embedded Systems">Apply for this Track</button>
+      </div>
+    </div>
+
+    <!-- Card 6: Data Science -->
+    <div class="intern-card">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="assets/images/machine.jpg" alt="Data Science &amp; Business Intelligence" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-data">Analytics</span>
+        <h3>Data Science &amp; Business Intelligence</h3>
+        <p>Data cleaning, exploratory data analysis, interactive dashboarding, SQL database querying, and predictive statistical analytics.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 Tech &amp; Management</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Data Science &amp; Business Analytics">Apply for this Track</button>
+      </div>
+    </div>
+
+    <!-- Card 7: Web Development & MERN Stack -->
+    <div class="intern-card">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="assets/images/connect.jpg" alt="Full-Stack Web Development" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-web">Web Development</span>
+        <h3>Full-Stack Web Development (MERN)</h3>
+        <p>Modern frontend engineering with React, component state architecture, Node/Express REST APIs, MongoDB NoSQL databases, and cloud hosting.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 B.Tech / BCA / MCA</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Full-Stack Web Development (MERN)">Apply for this Track</button>
+      </div>
+    </div>
+
+    <!-- Card 8: Embedded Systems & VLSI -->
+    <div class="intern-card">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="assets/images/arduino.jpg" alt="Embedded Systems &amp; VLSI Design" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-vlsi">VLSI &amp; Electronics</span>
+        <h3>Embedded Systems &amp; VLSI Design</h3>
+        <p>Digital circuit synthesis, Verilog HDL modeling, FPGA simulation, microcontroller interfacing, and embedded firmware design.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 ECE / EE / Instrumentation</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Embedded Systems &amp; VLSI Design">Apply for this Track</button>
+      </div>
+    </div>
+
+    <!-- Card 9: 9TH SECTION - EXPLORE MORE PROGRAMS -->
+    <div class="intern-card explore-card">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="assets/images/innovation.jpg" alt="Catalog Overview - 20+ Industrial Programs" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="explore-badge">Catalog Overview</span>
+        <h3>Explore 20+ More Programs</h3>
+        <p>Looking for a specific domain? Browse our comprehensive catalog including Generative AI, Mobile Apps (Flutter), Big Data, PLC/SCADA, DevSecOps, QA Automation, and more.</p>
+        <div class="intern-meta">
+          <span>🚀 22+ Specialized Tracks</span>
+          <span>🎓 ISO 9001 Accredited</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <a class="btn-explore" href="internships/index.html" data-programs-gate>Explore All 20+ Programs →</a>
+      </div>
+    </div>
+
+  </div>
+</div></section>
+
+<!-- ═══════════════ WHAT YOU WILL GET AFTER JOINING ═══════════════ -->
+<section id="what-you-get" style="padding:64px 0;background:#fff">
+  <div class="w">
+    <div style="text-align:center;max-width:760px;margin:0 auto 48px">
+      <span class="tag">Tangible Career Deliverables</span>
+      <h2 style="font-size:2.2rem;margin:12px 0 16px;color:#0F172A">What You Will Get After Joining This Program</h2>
+      <p style="color:#475569;font-size:1.05rem;line-height:1.6">When you join a Yuvantara Industrial Program, you don't just gain knowledge—you walk away with a comprehensive suite of verified corporate assets and career credentials.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+      <!-- Item 1: Digitally Signed Offer Letter -->
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC;transition:all .2s ease">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">📜</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">1. Digitally Signed Offer Letter</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">Official appointment letter bearing company CIN, corporate letterhead, unique Ref No, and machine-scannable verification QR code.</p>
+      </div>
+
+      <!-- Item 2: Production GitHub Portfolio -->
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC;transition:all .2s ease">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">💻</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">2. Production GitHub Portfolio</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">A fully documented, containerized engineering project with unit tests and clean Conventional Commits to showcase to recruiters.</p>
+      </div>
+
+      <!-- Item 3: ISO 9001:2015 Industrial Certificate -->
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC;transition:all .2s ease">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">🎓</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">3. Verified Industrial Certificate</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">Instantly generated upon 100% completion with unique Certificate ID and dynamic QR code linked to our public verification portal.</p>
+      </div>
+
+      <!-- Item 4: Market-Ready Skills & Placement Support -->
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC;transition:all .2s ease">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">💼</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">4. Market-Ready Skills &amp; Placement Support</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">Direct campus-to-corporate mentorship, resume ATS screening, placement referrals, and tailored engineering interview preparation to land high-growth tech roles.</p>
+      </div>
+
+      <!-- Item 5: 1-on-1 Mock Interviews -->
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC;transition:all .2s ease">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">🧑‍💼</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">5. Technical Mock Interviews</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">1-on-1 sprint evaluations, resume optimization, and mock technical interview rounds mirroring Tier-1 MNC hiring standards.</p>
+      </div>
+
+      <!-- Item 6: Letter of Recommendation (LOR) -->
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC;transition:all .2s ease">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">🌟</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">6. Recommendation Letter (LOR)</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">High-performing interns (Grade A+) receive an official corporate Letter of Recommendation from our Chief Technology Officer.</p>
+      </div>
+
+      <!-- Item 7: Lifetime Community & Lab Access -->
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC;transition:all .2s ease">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">🌐</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">7. Alumni Network &amp; Sandboxes</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">Ongoing access to Yuvantara alumni channels, peer networking, job opportunity referrals, and cloud sandbox sandpits.</p>
+      </div>
+    </div>
+
+    <!-- Quick CTA banner inside What You Get -->
+    <div style="margin-top:40px;background:linear-gradient(135deg,#1E3A8A,#0F172A);border-radius:16px;padding:32px 36px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
+      <div>
+        <h3 style="margin:0 0 6px;color:#fff;font-size:1.4rem">Ready to accelerate your engineering career?</h3>
+        <p style="margin:0;color:#93C5FD;font-size:.95rem">Applications for upcoming 2026 industrial cohorts are open. Secure your track today.</p>
+      </div>
+      <div style="display:flex;gap:12px">
+        <button class="btn p" data-auth="signup" style="background:#2563EB;border-color:#2563EB">Apply for Internship</button>
+        <a class="btn" href="internships/index.html" data-programs-gate style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">View All 22+ Tracks</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SOLUTIONS ═══════════════ -->
+<section id="solutions"><div class="w">
+  <h2>Three connected disciplines. One technology partner.</h2>
+  <p class="lead">Security, infrastructure, and workforce capability depend on one another. We design, deploy, and operate them with one accountable team.</p>
+  <div class="grid">
+    <div class="card pc">
+      <div class="pic" data-n="cybersecurity"><img data-img="cybersecurity" alt="Cybersecurity" loading="lazy"></div>
+      <div class="cb">
+        <h3><a href="cybersecurity-solutions/index.html">Cybersecurity Solutions</a></h3>
+        <p>We start with a threat assessment, then plan, roll out, and support the controls that protect your endpoints, firewalls, email, and cloud assets.</p>
+        <ul>
+          <li><a href="cybersecurity-solutions/endpoint-security/index.html">Endpoint Security &amp; EDR</a></li>
+          <li><a href="cybersecurity-solutions/network-security/index.html">Network Security &amp; Firewalls</a></li>
+          <li><a href="cybersecurity-solutions/siem/index.html">SIEM &amp; Threat Intelligence</a></li>
+          <li><a href="cybersecurity-solutions/email-security/index.html">Email Security &amp; Anti-Phishing</a></li>
+        </ul>
+        <a href="cybersecurity-solutions/index.html">Explore cybersecurity solutions →</a>
+      </div>
+    </div>
+    <div class="card pc">
+      <div class="pic" data-n="infrastructure"><img data-img="infrastructure" alt="IT Infrastructure" loading="lazy"></div>
+      <div class="cb">
+        <h3><a href="it-infrastructure-solutions/index.html">IT Infrastructure Solutions</a></h3>
+        <p>We supply, install, and optimize core business foundations: compute servers, storage systems, enterprise networking, and disaster recovery.</p>
+        <ul>
+          <li><a href="it-infrastructure-solutions/unified-endpoint-management/index.html">Unified Endpoint Management</a></li>
+          <li><a href="it-infrastructure-solutions/cloud-infrastructure-hosting/index.html">Cloud Hosting &amp; Hybrid Cloud</a></li>
+          <li><a href="it-infrastructure-solutions/enterprise-networking/index.html">Enterprise Networking &amp; SD-WAN</a></li>
+          <li><a href="it-infrastructure-solutions/backup-disaster-recovery/index.html">Backup &amp; Disaster Recovery</a></li>
+        </ul>
+        <a href="it-infrastructure-solutions/index.html">Explore infrastructure solutions →</a>
+      </div>
+    </div>
+    <div class="card pc">
+      <div class="pic" data-n="managed-services"><img data-img="managed-services" alt="Managed Services" loading="lazy"></div>
+      <div class="cb">
+        <h3><a href="managed-services/index.html">Managed Services</a></h3>
+        <p>Continuous daily monitoring, preventative maintenance, and rapid technical support delivered remotely or on-site under strict SLAs.</p>
+        <ul>
+          <li><a href="managed-services/managed-it-services/index.html">Managed IT Services &amp; Desk</a></li>
+          <li><a href="managed-services/managed-cybersecurity/index.html">Managed Cybersecurity &amp; SOC</a></li>
+          <li><a href="managed-services/soc-implementation/index.html">SOC Implementation &amp; Support</a></li>
+          <li><a href="managed-services/infrastructure-monitoring/index.html">Infrastructure 24×7 Monitoring</a></li>
+        </ul>
+        <a href="managed-services/index.html">Explore managed services →</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══════════════ WHY YUVANTARA — with solid colour boxes ═══════════════ -->
+<section class="alt"><div class="w split">
+  <div>
+    <span class="tag">Why Yuvantara</span>
+    <h2>Advice driven by your needs, not by vendor sales.</h2>
+    <p class="lead">We are an independent technology partner based in Patna, Bihar, serving corporate clients and ambitious students across India. We engineer technology that fits your actual requirements.</p>
+    <a class="btn p" href="about/index.html">About our company</a>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <h3>Independent recommendations</h3>
+      <p>Technology is evaluated strictly against your architecture, security fit, operational scale, and budget.</p>
+    </div>
+    <div class="card">
+      <h3>Engineering-led implementation</h3>
+      <p>Specialist engineers manage deployment, configuration, integration, and security testing.</p>
+    </div>
+    <div class="card">
+      <h3>Documentation and knowledge transfer</h3>
+      <p>We document what we build and provide hands-on walk-throughs to your in-house teams.</p>
+    </div>
+    <div class="card">
+      <h3>Long-term accountability</h3>
+      <p>Defined escalation paths and support SLAs ensure seamless continuity beyond project go-live.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Solid colour boxes: our strengths at a glance -->
+<div class="w" style="margin-top:48px">
+  <h2>What we bring to every engagement</h2>
+  <div class="sbox-row">
+    <div class="sbox sbox-blue">
+      <div class="ico">🛡️</div>
+      <h3>Security-first thinking</h3>
+      <p class="sub">Every architecture decision factors in threat exposure, compliance, and zero-trust controls.</p>
+    </div>
+    <div class="sbox sbox-cyan">
+      <div class="ico">⚙️</div>
+      <h3>Proven engineering process</h3>
+      <p class="sub">We assess, design, implement, and hand over with thorough documentation — no black boxes.</p>
+    </div>
+    <div class="sbox sbox-indigo">
+      <div class="ico">📡</div>
+      <h3>Continuous monitoring</h3>
+      <p class="sub">Post-deployment, our team monitors your critical systems around the clock for anomalies.</p>
+    </div>
+    <div class="sbox sbox-green">
+      <div class="ico">✅</div>
+      <h3>Compliance-ready</h3>
+      <p class="sub">ISO 9001:2015 accredited. We help you stay audit-ready for DPDP Act, ISO 27001, and SOC standards.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════ INDUSTRIES (CLEAN, DEDUPLICATED) ═══════════════ -->
+<section id="industries"><div class="w">
+  <span class="tag">Sectors We Empower</span>
+  <h2>Different environments, different requirements.</h2>
+  <p class="lead">Each domain has its own data sensitivity, regulatory compliance, and uptime requirements. The core security disciplines stay rigorous; the solution architecture is tailored.</p>
+
+  <div class="ind-grid">
+    <a class="ind-card" href="industries/machine-learning/index.html">
+      <div class="pic" data-n="machine-learning"><img data-img="machine-learning" alt="Machine Learning" loading="lazy"></div>
+      <div class="cb">
+        <h3>Machine Learning</h3>
+        <p>Data pipelines, GPU compute clusters, model versioning, and secure MLOps.</p>
+      </div>
+    </a>
+    <a class="ind-card" href="industries/healthcare/index.html">
+      <div class="pic" data-n="healthcare"><img data-img="healthcare" alt="Healthcare" loading="lazy"></div>
+      <div class="cb">
+        <h3>Healthcare</h3>
+        <p>Hospitals, diagnostic labs, electronic health records, and HIPAA-grade data security.</p>
+      </div>
+    </a>
+    <a class="ind-card" href="industries/logistics/index.html">
+      <div class="pic" data-n="logistics"><img data-img="logistics" alt="Logistics" loading="lazy"></div>
+      <div class="cb">
+        <h3>Logistics &amp; Supply</h3>
+        <p>Warehousing networks, fleet telemetry tracking, and uninterrupted supply chain uptime.</p>
+      </div>
+    </a>
+    <a class="ind-card" href="industries/education/index.html">
+      <div class="pic" data-n="education"><img data-img="education" alt="Education" loading="lazy"></div>
+      <div class="cb">
+        <h3>Education &amp; Academics</h3>
+        <p>Campus Wi-Fi infrastructure, student database security, and virtual training labs.</p>
+      </div>
+    </a>
+    <a class="ind-card" href="industries/ai/index.html">
+      <div class="pic" data-n="ai"><img data-img="ai" alt="AI" loading="lazy"></div>
+      <div class="cb">
+        <h3>AI &amp; Automation</h3>
+        <p>Autonomous pipelines, LLM fine-tuning, and robotic workflow automations.</p>
+      </div>
+    </a>
+    <a class="ind-card" href="industries/robotics/index.html">
+      <div class="pic" data-n="robotics"><img data-img="robotics" alt="Robotics" loading="lazy"></div>
+      <div class="cb">
+        <h3>Robotics &amp; IoT</h3>
+        <p>Connected field sensors, embedded hardware controllers, and industrial SCADA security.</p>
+      </div>
+    </a>
+    <a class="ind-card" href="industries/agriculture/index.html">
+      <div class="pic" data-n="agriculture"><img data-img="agriculture" alt="Agriculture" loading="lazy"></div>
+      <div class="cb">
+        <h3>Smart Agriculture</h3>
+        <p>Soil &amp; weather sensor telemetry, smart irrigation data, and agri-supply networks.</p>
+      </div>
+    </a>
+    <a class="ind-card" href="industries/financial/index.html">
+      <div class="pic" data-n="financial"><img data-img="financial" alt="Financial" loading="lazy"></div>
+      <div class="cb">
+        <h3>Financial Services</h3>
+        <p>Banking gateway security, fraud monitoring, high-availability ledger storage, and compliance.</p>
+      </div>
+    </a>
+  </div>
+</div></section>
+
+<!-- ═══════════════ COMMON QUESTIONS ═══════════════ -->
+<section class="alt"><div class="w">
+  <h2>Frequently Asked Questions</h2>
+  <details class="f"><summary>What programs and services does Yuvantara provide?</summary><p>Yuvantara provides enterprise cybersecurity solutions, IT infrastructure implementation, 24×7 managed services, as well as hands-on industrial internship programs in Cybersecurity, AI/ML, Cloud DevOps, Python, and Robotics with verified certifications.</p></details>
+  <details class="f"><summary>How do I apply for an internship at Yuvantara?</summary><p>Click on the <strong>Apply for Internship</strong> button in the navigation or on any track card. Select your preferred domain, provide your academic details, stream, and college name. Our academic counselor will contact you within 24 hours.</p></details>
+  <details class="f"><summary>How can students and employers verify a Yuvantara Certificate?</summary><p>Go to the <strong>Resources</strong> dropdown in the top menu and select <a href="verify-certificate/index.html" style="color:var(--ac);text-decoration:underline">Verify Certificate</a>. Enter the unique Certificate ID (e.g. YUV-2026-CS101) to instantly view the authenticated candidate details, completion grade, and issuance date.</p></details>
+  <details class="f"><summary>Where is Yuvantara located?</summary><p>Our primary office is at Lekha Nagar, Saguna More, Patna, Bihar. We serve clients and students across India and globally.</p></details>
+  <details class="f"><summary>Are Yuvantara internships recognized and accredited?</summary><p>Yes. Yuvantara is an ISO 9001:2015 certified and MSME-registered organisation. Our certificates are recognized by academic institutions and corporate recruiters across the country.</p></details>
+</div></section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section><div class="w"><div class="cta">
+  <h2>Ready to start your journey with Yuvantara?</h2>
+  <p>Whether you want to build career-defining tech skills through our internship programs or secure your corporate IT infrastructure, we are here to help.</p>
+  <button class="btn p" data-auth="signup">Apply for Internship Programme</button>
+  <a class="btn" href="contact/index.html">Send Enquiry</a>
+  <p style="margin-top:16px"><a href="mailto:yuvantara@yuvantaraventure.com">yuvantara@yuvantaraventure.com</a> &nbsp; <a href="tel:+91 98765 43210">+91 98765 43210</a></p>
+</div></div></section>
+
+</main>
+
+<!-- ═══════════════ RELEVANT FOOTER ═══════════════ -->
+<footer><div class="w">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3><i></i>Yuvantara</h3>
+      <p>Empowering students and technology teams through advanced industrial internships, enterprise cybersecurity, and robust IT infrastructure solutions.</p>
+      <div class="footer-contact-item"><i>📍</i><span>Lekha Nagar, Saguna More, Patna, Bihar</span></div>
+      <div class="footer-contact-item"><i>✉️</i><a href="mailto:yuvantara@yuvantaraventure.com">yuvantara@yuvantaraventure.com</a></div>
+      <div class="footer-contact-item"><i>📞</i><a href="tel:+919876543210">+91 98765 43210</a></div>
+    </div>
+    <div class="footer-col">
+      <h4>Internship Programs</h4>
+      <a href="internships/index.html" data-auth="signup" data-course="Cybersecurity &amp; SOC Operations">Cybersecurity &amp; SOC</a>
+      <a href="internships/index.html" data-auth="signup" data-course="Artificial Intelligence &amp; Machine Learning">AI &amp; Machine Learning</a>
+      <a href="internships/index.html" data-auth="signup" data-course="Cloud Infrastructure &amp; DevOps">Cloud Infrastructure &amp; DevOps</a>
+      <a href="internships/index.html" data-auth="signup" data-course="Python Full-Stack &amp; Automation">Python Full-Stack &amp; Automation</a>
+      <a href="internships/index.html" data-auth="signup" data-course="Robotics &amp; IoT Embedded Systems">Robotics, IoT &amp; Embedded</a>
+      <a href="internships/index.html" data-programs-gate>View All 22+ Programs →</a>
+    </div>
+    <div class="footer-col">
+      <h4>Technology Solutions</h4>
+      <a href="cybersecurity-solutions/index.html">Cybersecurity Solutions</a>
+      <a href="cybersecurity-solutions/network-security/index.html">Network Security &amp; Firewalls</a>
+      <a href="it-infrastructure-solutions/index.html">IT Infrastructure Solutions</a>
+      <a href="managed-services/index.html">Managed IT Services</a>
+      <a href="managed-services/soc-implementation/index.html">SOC Implementation</a>
+      <a href="about/certifications/index.html">ISO 9001 Quality</a>
+    </div>
+    <div class="footer-col">
+      <h4>Student &amp; Verification</h4>
+      <a href="verify-certificate/index.html">Verify Certificate</a>
+      <a href="internships/index.html" data-programs-gate>Internship Catalog</a>
+      <a href="#" data-auth="signup">Apply for Internship</a>
+      <a href="#" data-auth="login">Student Portal Login</a>
+      <a href="careers/index.html">Careers &amp; Mentorship</a>
+      <a href="contact/index.html">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2026 Yuvantara. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="privacy-policy/index.html">Privacy Policy</a>
+      <a href="terms/index.html">Terms of Use</a>
+      <a href="verify-certificate/index.html">Verify Certificate</a>
+      <a href="sitemap/index.html">Sitemap</a>
+    </div>
+  </div>
+</div></footer>
+
+<script src="assets/config.js?v=20261127c"></script>
+<script src="assets/db.js?v=20261127c"></script>
+<script src="assets/cloud-db.js?v=20261127c"></script>
+<script src="assets/header.js?v=20261127c"></script>
+<script src="assets/footer.js?v=20261127c"></script>
+<script src="assets/site.js?v=20261127c"></script>
+</body></html>

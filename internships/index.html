@@ -1,0 +1,689 @@
+﻿<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0A0E17"><title>Industrial Internship &amp; Training Programs | Yuvantara</title><link rel="stylesheet" href="../assets/style.css?v=20261127c"><link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192.png">
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+<link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+<meta name="theme-color" content="#0A0E17">
+<meta property="og:image" content="https://yuvantaraventure.com/assets/images/og-image.png">
+<meta name="twitter:image" content="https://yuvantaraventure.com/assets/images/og-image.png">
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ═══ AUTH MODAL ═══ -->
+<div id="auth-overlay" class="auth-overlay" aria-hidden="true"></div>
+<div id="auth-modal" class="auth-modal" role="dialog" aria-modal="true" aria-label="Login or Sign up" aria-hidden="true">
+  <button class="auth-close" aria-label="Close">✕</button>
+  <div class="auth-tabs">
+    <button class="auth-tab-btn active" data-tab="login">Login</button>
+    <button class="auth-tab-btn" data-tab="signup">Apply / Sign Up</button>
+  </div>
+  <div class="auth-pane active" data-pane="login">
+    <h2 class="auth-title">Welcome back</h2>
+    <p class="auth-sub">Log in to your Yuvantara student portal</p>
+    <form id="form-login" class="auth-form" novalidate>
+      <div class="fgroup"><label for="l-email">Email address</label><input id="l-email" type="email" placeholder="you@example.com" required autocomplete="email"></div>
+      <div class="fgroup"><label for="l-pass">Password</label><input id="l-pass" type="password" placeholder="••••••••" required autocomplete="current-password"></div>
+      <div class="fgroup captcha-group"><label>Captcha — <span class="captcha-q" id="cap-login-q"></span></label><input id="cap-login-a" type="number" placeholder="Your answer" required min="0"></div>
+      <button class="btn p auth-submit" type="submit">Login</button>
+      <p class="auth-switch">Don't have an account? <button type="button" class="auth-tab-btn link" data-tab="signup">Sign up</button></p>
+    </form>
+  </div>
+  <div class="auth-pane" data-pane="signup">
+    <h2 class="auth-title">Apply for Internship</h2>
+    <p class="auth-sub">Join the Yuvantara industrial training program</p>
+    <form id="form-signup" class="auth-form" novalidate>
+      <div class="fgroup"><label for="s-name">Full name</label><input id="s-name" type="text" placeholder="Your full name" required autocomplete="name"></div>
+      <div class="frow">
+        <div class="fgroup"><label for="s-email">Email address</label><input id="s-email" type="email" placeholder="you@example.com" required autocomplete="email"></div>
+        <div class="fgroup"><label for="s-phone">WhatsApp / Phone</label><input id="s-phone" type="tel" placeholder="+91 98765 43210" required></div>
+      </div>
+      <div class="frow"><div class="fgroup"><label for="s-dob">Date of Birth</label><input id="s-dob" type="date" required max="2010-01-01"></div><div class="fgroup"><label for="s-pass">Password</label><input id="s-pass" type="password" placeholder="Create password" required autocomplete="new-password"></div></div>
+      <div class="fgroup"><label for="s-pass-confirm">Confirm Password</label><input id="s-pass-confirm" type="password" placeholder="Confirm your password" required autocomplete="new-password"></div>
+      <div class="frow">
+        <div class="fgroup" style="display:none">
+          <label for="s-prog">Internship Track</label>
+          <select id="s-prog">
+            <option value="">Select track</option>
+            <option>Cybersecurity &amp; Ethical Hacking</option>
+            <option>SOC Analyst &amp; Threat Hunting</option>
+            <option>Cloud Security &amp; DevSecOps</option>
+            <option>Network Security &amp; Firewalls</option>
+            <option>Applied AI &amp; Deep Learning</option>
+            <option>Machine Learning &amp; MLOps Pipelines</option>
+            <option>Generative AI &amp; Large Language Models</option>
+            <option>Big Data &amp; Data Engineering</option>
+            <option>Data Science &amp; Business Intelligence</option>
+            <option>Cloud Infrastructure &amp; AWS Architecture</option>
+            <option>Azure Cloud &amp; DevOps CI/CD</option>
+            <option>Python Full-Stack Engineering</option>
+            <option>MERN Stack Web Development</option>
+            <option>Frontend Engineering (React &amp; Next.js)</option>
+            <option>Backend Microservices (Go &amp; Docker)</option>
+            <option>Mobile App Development (Flutter)</option>
+            <option>Embedded Systems &amp; Microcontrollers</option>
+            <option>Robotics &amp; Autonomous Hardware</option>
+            <option>Internet of Things (IoT) &amp; Smart Sensors</option>
+            <option>VLSI Design &amp; Digital Verification</option>
+            <option>Industrial Automation &amp; PLC/SCADA</option>
+            <option>QA Automation &amp; Software Testing</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label for="s-stream">Stream / Degree</label>
+          <select id="s-stream" required>
+            <option value="">Select stream</option>
+            <option>B.Tech / B.E (CSE, IT, ECE, EE, Mech)</option>
+            <option>MCA / M.Tech</option>
+            <option>BCA / B.Sc Computer Science</option>
+            <option>Diploma in Engineering</option>
+            <option>Other Graduate / Post Graduate</option>
+          </select>
+        </div>
+      </div>
+      <div class="fgroup"><label for="s-college">College / University name</label><input id="s-college" type="text" placeholder="e.g. Jadavpur University" required></div>
+      <div class="fgroup checkbox-group" style="margin:10px 0 12px"><label style="display:flex;align-items:flex-start;gap:8px;font-size:0.83rem;color:#334155;cursor:pointer;line-height:1.4"><input type="checkbox" id="s-declaration" required style="margin-top:2px;accent-color:#0284C7;width:16px;height:16px;flex-shrink:0"><span><strong>Self-Declaration:</strong> I hereby declare that all details provided are genuine and accurate. I agree to abide by Yuvantara Corporate Policies and IT Act compliance.</span></label></div>
+      <div class="fgroup captcha-group"><label>Captcha — <span class="captcha-q" id="cap-signup-q"></span></label><input id="cap-signup-a" type="number" placeholder="Your answer" required min="0"></div>
+      <button class="btn p auth-submit" type="submit">Submit Application</button>
+      <p class="auth-switch">Already have an account? <button type="button" class="auth-tab-btn link" data-tab="login">Login</button></p>
+    </form>
+  </div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header><div class="w bar">
+  <a class="logo" href="../index.html" aria-label="Yuvantara Venture home"><img class="logo-img" src="../assets/images/logo-mark-light.png" alt="" width="32" height="44"><span class="logo-text">Yuvantara<small>Venture</small></span></a>
+  <button class="burger" aria-label="Menu">Menu</button>
+  <nav class="nav">
+    <a href="../internships/index.html">Internships</a>
+    <details class="dd mg"><summary>Solutions</summary><div class="menu mega"><div><h4><a href="../cybersecurity-solutions/index.html">Cybersecurity Solutions</a></h4><a href="../cybersecurity-solutions/endpoint-security/index.html">Endpoint Security<small>EDR, antivirus &amp; device hardening</small></a><a href="../cybersecurity-solutions/network-security/index.html">Network Security<small>Firewalls, IPS &amp; segmentation</small></a><a href="../cybersecurity-solutions/siem/index.html">SIEM<small>Log collection &amp; correlation</small></a><a href="../cybersecurity-solutions/email-security/index.html">Email Security<small>Phishing &amp; malware defence</small></a><a href="../cybersecurity-solutions/vulnerability-management/index.html">Vulnerability Management<small>Scanning &amp; patch priority</small></a></div><div><h4><a href="../it-infrastructure-solutions/index.html">IT Infrastructure Solutions</a></h4><a href="../it-infrastructure-solutions/unified-endpoint-management/index.html">Unified Endpoint Management<small>Control &amp; deploy devices</small></a><a href="../it-infrastructure-solutions/cloud-infrastructure-hosting/index.html">Cloud Infrastructure<small>Cloud hosting &amp; migration</small></a><a href="../it-infrastructure-solutions/enterprise-networking/index.html">Enterprise Networking<small>Switching &amp; SD-WAN</small></a><a href="../it-infrastructure-solutions/backup-disaster-recovery/index.html">Backup &amp; Recovery<small>Immutable reliable backup</small></a></div><div><h4><a href="../managed-services/index.html">Managed Services</a></h4><a href="../managed-services/managed-it-services/index.html">Managed IT Services<small>Service desk &amp; support</small></a><a href="../managed-services/managed-cybersecurity/index.html">Managed Cybersecurity<small>Round-the-clock SOC defense</small></a><a href="../managed-services/soc-implementation/index.html">SOC Implementation<small>Build your own SOC</small></a></div></div></details>
+    <details class="dd"><summary>Resources</summary><div class="menu"><a href="../blog/index.html">Blog<small>Technical guides</small></a><a href="../case-studies/index.html">Case Studies<small>Real engagements</small></a><a href="../verify-certificate/index.html">Verify Certificate<small>Instant credential authentication</small></a><a href="../use-cases/index.html">Use Cases<small>Problems we solve</small></a><a href="../resources/downloads/index.html">Downloads<small>Brochures &amp; datasheets</small></a></div></details>
+    <details class="dd"><summary>About</summary><div class="menu"><a href="../about/index.html">Our Company<small>Who we are</small></a><a href="../about/certifications/index.html">Certifications<small>ISO 9001 standard</small></a><a href="../careers/index.html">Careers<small>Join our team</small></a></div></details>
+    <a href="../support/index.html">Support</a>
+    <button class="btn p" style="margin:0 0 0 8px;padding:9px 18px" data-auth="signup">Apply for Internship</button>
+    <button class="btn" style="margin:0 0 0 4px;padding:9px 16px" data-auth="login">Login</button>
+  </nav>
+</div></header>
+
+<main id="main">
+
+<section class="hero"><div class="w">
+  <div class="crumb"><a href="../index.html">Home</a> / Internship Programs</div>
+  <h1>Explore <span class="gt">22+ Specialized</span> Industrial Internship Programs</h1>
+  <p class="lead">Accelerate your career with industry-recognized internships in Cybersecurity, Artificial Intelligence, Cloud Infrastructure, Full-Stack Engineering, VLSI, and Robotics. All programs include hands-on project mentoring, lab environments, and ISO 9001:2015 verified certifications.</p>
+</div></section>
+
+<section><div class="w">
+  <!-- FILTER TABS -->
+  <div class="filter-tabs" id="catalog-filters">
+    <button class="filter-tab active" data-filter="all">All Programs (22)</button>
+    <button class="filter-tab" data-filter="cyber">Cybersecurity &amp; Defense (4)</button>
+    <button class="filter-tab" data-filter="ai">AI &amp; Data Science (5)</button>
+    <button class="filter-tab" data-filter="cloud">Cloud &amp; DevOps (2)</button>
+    <button class="filter-tab" data-filter="software">Software &amp; Web (5)</button>
+    <button class="filter-tab" data-filter="hardware">Hardware, Robotics &amp; VLSI (4)</button>
+    <button class="filter-tab" data-filter="automation">Automation &amp; QA (2)</button>
+  </div>
+
+  <!-- 22 PROGRAMS GRID -->
+  <div class="intern-grid" id="catalog-grid">
+
+    <!-- 1 -->
+    <div class="intern-card" data-cat="cyber">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/cyber.jpg" alt="Cybersecurity" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-cyber">Cybersecurity</span>
+        <h3>Cybersecurity &amp; Ethical Hacking</h3>
+        <p>Vulnerability assessment, Wireshark packet capture, Metasploit penetration testing, port scanning, and OWASP Top 10 remediation.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 B.Tech / BCA / MCA</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Cybersecurity &amp; Ethical Hacking">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="intern-card" data-cat="cyber">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/cyber.jpg" alt="SOC Analyst &amp; Threat Hunting" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-cyber">Security Operations</span>
+        <h3>SOC Analyst &amp; Threat Hunting</h3>
+        <p>Log correlation, incident response triage, SIEM administration with Splunk &amp; ELK, endpoint threat hunting, and security playbooks.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 CSE / IT / MCA</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="SOC Analyst &amp; Threat Hunting">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="intern-card" data-cat="cyber">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/automation.jpg" alt="Cloud Security &amp; DevSecOps" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-cyber">Cloud Security</span>
+        <h3>Cloud Security &amp; DevSecOps</h3>
+        <p>Hardening AWS &amp; Azure cloud IAM, container image vulnerability scanning, SAST/DAST pipeline integration, and zero-trust policy design.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 All Tech Streams</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Cloud Security &amp; DevSecOps">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="intern-card" data-cat="cyber">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/connect.jpg" alt="Network Security &amp; Firewalls" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-cyber">Infrastructure Security</span>
+        <h3>Network Security &amp; Firewalls</h3>
+        <p>Enterprise firewall configuration (Fortinet/SonicWall), VLAN network segmentation, site-to-site IPsec VPNs, and IDS/IPS intrusion prevention.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 ECE / EE / CSE</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Network Security &amp; Firewalls">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="intern-card" data-cat="ai">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/ai.jpg" alt="Artificial Intelligence" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-ai">Artificial Intelligence</span>
+        <h3>Applied AI &amp; Deep Learning</h3>
+        <p>Neural network architectures with PyTorch &amp; TensorFlow, convolutional neural nets (CNNs) for vision, and transfer learning workflows.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 Engineering / Science</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Applied AI &amp; Deep Learning">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="intern-card" data-cat="ai">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/machine.jpg" alt="Machine Learning &amp; MLOps Pipelines" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-ai">Machine Learning</span>
+        <h3>Machine Learning &amp; MLOps Pipelines</h3>
+        <p>Feature engineering, Scikit-learn modeling, automated model evaluation, MLflow tracking, and production model serving with Docker APIs.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 Tech &amp; Math</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Machine Learning &amp; MLOps Pipelines">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="intern-card" data-cat="ai">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/innovation.jpg" alt="Generative AI &amp; Large Language Models" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-ai">Generative AI</span>
+        <h3>Generative AI &amp; Large Language Models</h3>
+        <p>Prompt engineering, LangChain &amp; LlamaIndex agent workflows, vector embeddings with Pinecone/ChromaDB, and Retrieval-Augmented Generation (RAG).</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 Advanced Developers</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Generative AI &amp; Large Language Models">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="intern-card" data-cat="ai">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/financial.jpg" alt="Big Data &amp; Data Engineering" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-ai">Big Data</span>
+        <h3>Big Data &amp; Data Engineering</h3>
+        <p>Distributed data pipelines using Apache Spark, PySpark transformations, Apache Kafka event streaming, data warehousing, and ETL design.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 B.Tech / MCA</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Big Data &amp; Data Engineering">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="intern-card" data-cat="ai">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/management.jpg" alt="Data Science &amp; Business Intelligence" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-ai">Analytics</span>
+        <h3>Data Science &amp; Business Intelligence</h3>
+        <p>Statistical analysis in Python, SQL query optimization, executive dashboards in Power BI and Tableau, and predictive business forecasting.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 Tech &amp; Management</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Data Science &amp; Business Intelligence">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="intern-card" data-cat="cloud">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/automation.jpg" alt="Cloud Computing" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-cloud">Cloud Computing</span>
+        <h3>Cloud Infrastructure &amp; AWS Architecture</h3>
+        <p>Deploying VPCs, EC2 clusters, S3 storage tiers, RDS databases, CloudWatch metrics, and Infrastructure as Code with Terraform.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 All Tech Streams</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Cloud Infrastructure &amp; AWS Architecture">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="intern-card" data-cat="cloud">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/automation.jpg" alt="Azure Cloud &amp; DevOps CI/CD" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-cloud">DevOps</span>
+        <h3>Azure Cloud &amp; DevOps CI/CD</h3>
+        <p>Automated build/release pipelines with GitHub Actions and Azure DevOps, Kubernetes pod orchestration, Helm charts, and Linux admin.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 B.Tech / BCA / MCA</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Azure Cloud &amp; DevOps CI/CD">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="intern-card" data-cat="software">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/python.jpg" alt="Python Full-Stack" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-code">Python</span>
+        <h3>Python Full-Stack Engineering</h3>
+        <p>Object-oriented Python architecture, backend REST APIs with FastAPI and Django, PostgreSQL integration, and asynchronous tasks.</p>
+        <div class="intern-meta">
+          <span>⏱️ 1 / 3 / 6 Months</span>
+          <span>🎓 All Streams</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Python Full-Stack Engineering">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="intern-card" data-cat="software">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/connect.jpg" alt="Web Development" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-web">Web Development</span>
+        <h3>MERN Stack Web Development</h3>
+        <p>Single-page applications using React.js, Express.js micro-backends, Node.js server runtimes, MongoDB database schemas, and JWT authentication.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 Engineering / BCA</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="MERN Stack Web Development">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="intern-card" data-cat="software">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/connect.jpg" alt="Frontend Engineering (React &amp; Next.js)" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-web">Frontend</span>
+        <h3>Frontend Engineering (React &amp; Next.js)</h3>
+        <p>Modern React 19 hooks, Next.js server components, TypeScript typing, Tailwind CSS responsive layouts, and performance optimization.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 Beginners to Pros</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Frontend Engineering (React &amp; Next.js)">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="intern-card" data-cat="software">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/python.jpg" alt="Backend Microservices (Go &amp; Docker)" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-code">Backend</span>
+        <h3>Backend Microservices (Go &amp; Docker)</h3>
+        <p>High-concurrency programming in Golang, gRPC &amp; REST communication, Redis caching layers, PostgreSQL indexing, and Docker containerization.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 CS / IT / MCA</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Backend Microservices (Go &amp; Docker)">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="intern-card" data-cat="software">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/innovation.jpg" alt="Mobile App Development (Flutter)" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-web">Mobile</span>
+        <h3>Mobile App Development (Flutter)</h3>
+        <p>Cross-platform iOS and Android mobile app engineering with Flutter and Dart, state management with Bloc/Provider, and Firebase backend integration.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 All Tech Streams</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Mobile App Development (Flutter)">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="intern-card" data-cat="hardware">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/arduino.jpg" alt="Embedded Systems" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-iot">Embedded</span>
+        <h3>Embedded Systems &amp; Microcontrollers</h3>
+        <p>Bare-metal C programming for ARM Cortex &amp; PIC microcontrollers, SPI/I2C/UART communication protocols, timers, and PCB layout design.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 ECE / EE / EIE</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Embedded Systems &amp; Microcontrollers">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 18 -->
+    <div class="intern-card" data-cat="hardware">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/robotics.jpg" alt="Robotics" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-iot">Robotics</span>
+        <h3>Robotics &amp; Autonomous Hardware</h3>
+        <p>Robotic Operating System (ROS2) fundamentals, motor drivers, sensor fusion (IMU, LiDAR, Ultrasonic), and kinematic navigation algorithms.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 ECE / Mech / EE / CSE</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Robotics &amp; Autonomous Hardware">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 19 -->
+    <div class="intern-card" data-cat="hardware">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/robotics-lab.jpg" alt="Internet of Things (IoT) &amp; Smart Sensors" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-iot">IoT</span>
+        <h3>Internet of Things (IoT) &amp; Smart Sensors</h3>
+        <p>Connecting ESP32 and Raspberry Pi boards to MQTT brokers, building real-time telemetry dashboards, and cloud edge computing.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 All Tech Streams</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Internet of Things (IoT) &amp; Smart Sensors">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 20 -->
+    <div class="intern-card" data-cat="hardware">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/arduino.jpg" alt="VLSI Design &amp; Digital Verification" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-vlsi">VLSI</span>
+        <h3>VLSI Design &amp; Digital Verification</h3>
+        <p>Digital logic design, Verilog HDL synthesis, testbench verification, timing analysis with Xilinx Vivado, and FPGA board implementation.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 ECE / EE / Instrumentation</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="VLSI Design &amp; Digital Verification">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 21 -->
+    <div class="intern-card" data-cat="automation">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/automation.jpg" alt="Industrial Automation &amp; PLC/SCADA" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-code">Industrial Automation</span>
+        <h3>Industrial Automation &amp; PLC/SCADA</h3>
+        <p>Ladder logic programming for Siemens &amp; Allen-Bradley PLCs, SCADA interface design, industrial sensors, and relays automation.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 EE / EIE / Mech</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="Industrial Automation &amp; PLC/SCADA">Apply for Track</button>
+      </div>
+    </div>
+
+    <!-- 22 -->
+    <div class="intern-card" data-cat="automation">
+      <div>
+        <div style="height:120px;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#F1F5F9"><img src="../assets/images/management.jpg" alt="QA Automation &amp; Software Testing" loading="lazy" width="360" height="180" style="width:100%;height:100%;object-fit:cover"></div>
+        <span class="intern-tag tag-code">QA &amp; Testing</span>
+        <h3>QA Automation &amp; Software Testing</h3>
+        <p>Manual testing methodologies, automated regression test suites with Selenium &amp; Playwright in Python/JS, Postman API testing, and bug tracking in Jira.</p>
+        <div class="intern-meta">
+          <span>⏱️ 3 / 6 Months</span>
+          <span>🎓 All Tech Streams</span>
+          <span>📜 Verified Certificate</span>
+        </div>
+      </div>
+      <div class="acts-row">
+        <button class="btn p" data-auth="signup" data-course="QA Automation &amp; Software Testing">Apply for Track</button>
+      </div>
+    </div>
+
+  </div>
+</div></section>
+
+<!-- HOW INTERNSHIP WORKS -->
+<section class="alt"><div class="w">
+  <span class="tag">Program Framework</span>
+  <h2>How our internship training works</h2>
+  <div class="steps">
+    <li>
+      <h3>Assessment &amp; Batching</h3>
+      <p>Select your track and join small peer groups under an industry engineering mentor.</p>
+    </li>
+    <li>
+      <h3>Live Lab Work</h3>
+      <p>Configure real virtual labs, analyze security captures, and write production-grade code.</p>
+    </li>
+    <li>
+      <h3>Capstone Projects</h3>
+      <p>Build and document a full-fledged capstone project suitable for your portfolio and resume.</p>
+    </li>
+    <li>
+      <h3>Verified Certification</h3>
+      <p>Receive your tamper-proof ISO 9001:2015 accredited certificate and placement recommendation letter.</p>
+    </li>
+  </div>
+</div></section>
+
+<!-- ═══════════════ WHAT YOU WILL GET AFTER JOINING ═══════════════ -->
+<section id="what-you-get" style="padding:64px 0;background:#fff">
+  <div class="w">
+    <div style="text-align:center;max-width:760px;margin:0 auto 48px">
+      <span class="tag">Tangible Career Deliverables</span>
+      <h2 style="font-size:2.2rem;margin:12px 0 16px;color:#0F172A">What You Will Get After Joining This Program</h2>
+      <p style="color:#475569;font-size:1.05rem;line-height:1.6">When you join a Yuvantara Industrial Program, you walk away with a comprehensive suite of verified corporate assets and career credentials.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">📜</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">1. Digitally Signed Offer Letter</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">Official appointment letter bearing company CIN, corporate letterhead, unique Ref No, and machine-scannable verification QR code.</p>
+      </div>
+
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">💻</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">2. Production GitHub Portfolio</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">A fully documented, containerized engineering project with unit tests and clean Conventional Commits to showcase to recruiters.</p>
+      </div>
+
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">🎓</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">3. Verified Industrial Certificate</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">Instantly generated upon 100% completion with unique Certificate ID and dynamic QR code linked to our public verification portal.</p>
+      </div>
+
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">💼</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">4. Market-Ready Skills &amp; Placement Support</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">Direct campus-to-corporate mentorship, resume ATS screening, placement referrals, and tailored engineering interview preparation to land high-growth tech roles.</p>
+      </div>
+
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">🧑‍💼</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">5. Technical Mock Interviews</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">1-on-1 sprint evaluations, resume optimization, and mock technical interview rounds mirroring Tier-1 MNC hiring standards.</p>
+      </div>
+
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">🌟</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">6. Recommendation Letter (LOR)</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">High-performing interns (Grade A+) receive an official corporate Letter of Recommendation from our Chief Technology Officer.</p>
+      </div>
+
+      <div style="border:1.5px solid #E2E8F0;border-radius:14px;padding:26px 22px;background:#F8FAFC">
+        <div style="width:48px;height:48px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px">🌐</div>
+        <h4 style="margin:0 0 8px;font-size:1.1rem;color:#0F172A">7. Alumni Network &amp; Sandboxes</h4>
+        <p style="margin:0;font-size:.88rem;color:#64748B;line-height:1.6">Ongoing access to Yuvantara alumni channels, peer networking, job opportunity referrals, and cloud sandbox sandpits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section><div class="w"><div class="cta">
+  <h2>Enroll in an internship program today.</h2>
+  <p>Seats are allocated on a rolling basis. Submit your application and our academic coordinator will assist with batch schedules and onboarding.</p>
+  <button class="btn p" data-auth="signup">Apply for Internship Now</button>
+  <a class="btn" href="../contact/index.html">Speak to Academic Counselor</a>
+</div></div></section>
+
+</main>
+
+<!-- ═══════════════ RELEVANT FOOTER ═══════════════ -->
+<footer><div class="w">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3><i></i>Yuvantara</h3>
+      <p>Empowering students and technology teams through advanced industrial internships, enterprise cybersecurity, and robust IT infrastructure solutions.</p>
+      <div class="footer-contact-item"><i>📍</i><span>Lekha Nagar, Saguna More, Patna, Bihar</span></div>
+      <div class="footer-contact-item"><i>✉️</i><a href="mailto:yuvantara@yuvantaraventure.com">yuvantara@yuvantaraventure.com</a></div>
+      <div class="footer-contact-item"><i>📞</i><a href="tel:+919876543210">+91 98765 43210</a></div>
+    </div>
+    <div class="footer-col">
+      <h4>Internship Programs</h4>
+      <a href="../internships/index.html" data-auth="signup" data-course="Cybersecurity &amp; SOC Operations">Cybersecurity &amp; SOC</a>
+      <a href="../internships/index.html" data-auth="signup" data-course="Artificial Intelligence &amp; Machine Learning">AI &amp; Machine Learning</a>
+      <a href="../internships/index.html" data-auth="signup" data-course="Cloud Infrastructure &amp; DevOps">Cloud Infrastructure &amp; DevOps</a>
+      <a href="../internships/index.html" data-auth="signup" data-course="Python Full-Stack &amp; Automation">Python Full-Stack &amp; Automation</a>
+      <a href="../internships/index.html" data-auth="signup" data-course="Robotics &amp; IoT Embedded Systems">Robotics, IoT &amp; Embedded</a>
+      <a href="../internships/index.html">View All 22+ Programs →</a>
+    </div>
+    <div class="footer-col">
+      <h4>Technology Solutions</h4>
+      <a href="../cybersecurity-solutions/index.html">Cybersecurity Solutions</a>
+      <a href="../cybersecurity-solutions/network-security/index.html">Network Security &amp; Firewalls</a>
+      <a href="../it-infrastructure-solutions/index.html">IT Infrastructure Solutions</a>
+      <a href="../managed-services/index.html">Managed IT Services</a>
+      <a href="../managed-services/soc-implementation/index.html">SOC Implementation</a>
+      <a href="../about/certifications/index.html">ISO 9001 Quality</a>
+    </div>
+    <div class="footer-col">
+      <h4>Student &amp; Verification</h4>
+      <a href="../verify-certificate/index.html">Verify Certificate</a>
+      <a href="../internships/index.html">Internship Catalog</a>
+      <a href="#" data-auth="signup">Apply for Internship</a>
+      <a href="#" data-auth="login">Student Portal Login</a>
+      <a href="../careers/index.html">Careers &amp; Mentorship</a>
+      <a href="../contact/index.html">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2026 Yuvantara. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="../privacy-policy/index.html">Privacy Policy</a>
+      <a href="../terms/index.html">Terms of Use</a>
+      <a href="../verify-certificate/index.html">Verify Certificate</a>
+      <a href="../sitemap/index.html">Sitemap</a>
+    </div>
+  </div>
+</div></footer>
+
+<script src="../assets/config.js?v=20261127c"></script>
+<script src="../assets/db.js?v=20261127c"></script>
+<script src="../assets/cloud-db.js?v=20261127c"></script>
+<script src="../assets/header.js?v=20261127c"></script>
+<script src="../assets/footer.js?v=20261127c"></script>
+<script src="../assets/site.js?v=20261127c"></script>
+<script>
+// Filter tabs logic
+document.querySelectorAll('.filter-tab').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.filter-tab').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var cat = btn.dataset.filter;
+    document.querySelectorAll('#catalog-grid .intern-card').forEach(function(card){
+      if(cat === 'all' || card.dataset.cat === cat){
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+</body></html>

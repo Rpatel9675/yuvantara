@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0A0E17">
+  <title>Reset Password | Yuvantara</title>
+  <link rel="stylesheet" href="../assets/style.css?v=20261127c">
+  <link rel="stylesheet" href="../assets/portal.css?v=20261127c">
+  <style>
+    .fp-wrap {
+      min-height: calc(100vh - 70px);
+      background: #F8FAFC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 80px;
+    }
+    .fp-card {
+      width: 100%;
+      max-width: 480px;
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 36px 32px;
+      box-shadow: 0 10px 30px rgba(15,23,42,.08);
+    }
+    .fp-badge-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: #EFF6FF;
+      color: #2563EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 18px;
+      border: 1px solid #BFDBFE;
+    }
+    .fp-title {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: #0F172A;
+      text-align: center;
+      margin: 0 0 6px;
+    }
+    .fp-sub {
+      font-size: .9rem;
+      color: #64748B;
+      text-align: center;
+      margin: 0 0 24px;
+      line-height: 1.5;
+    }
+    .fp-step-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .fp-step-dot {
+      width: 32px;
+      height: 6px;
+      border-radius: 99px;
+      background: #E2E8F0;
+      transition: all .25s ease;
+    }
+    .fp-step-dot.active {
+      background: #2563EB;
+      width: 48px;
+    }
+    .fp-step-dot.done {
+      background: #10B981;
+    }
+    .fp-field {
+      margin-bottom: 18px;
+    }
+    .fp-field label {
+      display: block;
+      font-size: .88rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+    .fp-field input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #D1D5DB;
+      border-radius: 10px;
+      font: inherit;
+      font-size: .95rem;
+      background: #fff;
+      color: #111827;
+      transition: all .2s;
+    }
+    .fp-field input:focus {
+      outline: none;
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,.12);
+    }
+    .fp-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      background: #2563EB;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all .2s;
+      margin-top: 10px;
+    }
+    .fp-btn:hover {
+      background: #1D4ED8;
+      box-shadow: 0 6px 20px rgba(37,99,235,.3);
+    }
+    .strength-meter {
+      height: 5px;
+      background: #E2E8F0;
+      border-radius: 99px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .strength-fill {
+      height: 100%;
+      width: 0%;
+      transition: all .3s;
+    }
+  </style>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192.png">
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+<link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+<meta name="theme-color" content="#0A0E17">
+<meta property="og:image" content="https://yuvantaraventure.com/assets/images/og-image.png">
+<meta name="twitter:image" content="https://yuvantaraventure.com/assets/images/og-image.png">
+</head>
+<body>
+
+<header><div class="w bar">
+  <a class="logo" href="../index.html" aria-label="Yuvantara Venture home"><img class="logo-img" src="../assets/images/logo-mark-light.png" alt="" width="32" height="44"><span class="logo-text">Yuvantara<small>Venture</small></span></a>
+  <nav class="nav" style="margin-left:auto">
+    <a href="../internships/index.html">Internships</a>
+    <a href="../portal/index.html">Student Portal</a>
+    <a href="../index.html" class="btn" style="margin:0 0 0 8px;padding:8px 16px">Back to Home</a>
+  </nav>
+</div></header>
+
+<div class="fp-wrap">
+  <div class="fp-card">
+
+    <div class="fp-badge-icon" id="step-icon">🔐</div>
+
+    <!-- Stepper indicator -->
+    <div class="fp-step-indicator">
+      <div class="fp-step-dot active" id="dot-1" title="Step 1: Identity Verification"></div>
+      <div class="fp-step-dot" id="dot-2" title="Step 2: New Password"></div>
+    </div>
+
+    <!-- ═══ STEP 1: Verify Identity (Email + DOB + Captcha) ═══ -->
+    <div id="step-1-view">
+      <h1 class="fp-title">Forgot Password?</h1>
+      <p class="fp-sub">Enter your registered email address. We will send a 6-digit verification code (OTP) to it.</p>
+
+      <div class="alert-box error" id="alert-1" style="display:none;margin-bottom:16px"></div>
+
+      <form id="form-fp-verify">
+        <div class="fp-field">
+          <label for="fp-email">Registered Email Address</label>
+          <input type="email" id="fp-email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+
+        <div class="fp-field">
+          <label for="fp-captcha-ans">Security Captcha — <span id="fp-captcha-q" style="color:#2563EB;font-weight:700"></span></label>
+          <input type="number" id="fp-captcha-ans" placeholder="Enter answer" required min="0">
+        </div>
+
+        <button type="submit" class="fp-btn" id="btn-verify-identity">
+          <span>Send OTP &amp; Continue</span> →
+        </button>
+      </form>
+    </div>
+
+    <!-- ═══ STEP 2: Set New Password ═══ -->
+    <div id="step-2-view" style="display:none">
+      <h2 class="fp-title">Set New Password</h2>
+      <p class="fp-sub">Identity verified for <strong id="verified-target-email" style="color:#0F172A">you@example.com</strong>. Create your new secure password.</p>
+
+      <div class="alert-box error" id="alert-2" style="display:none;margin-bottom:16px"></div>
+
+      <form id="form-fp-reset">
+        <div class="fp-field">
+          <label for="fp-new-pass">New Password</label>
+          <input type="password" id="fp-new-pass" placeholder="••••••••" required minlength="8" autocomplete="new-password">
+          <div class="strength-meter"><div class="strength-fill" id="strength-fill"></div></div>
+          <small id="strength-text" style="font-size:.78rem;color:#64748B;display:block;margin-top:4px">Must be at least 8 characters with a number</small>
+        </div>
+
+        <div class="fp-field">
+          <label for="fp-confirm-pass">Confirm New Password</label>
+          <input type="password" id="fp-confirm-pass" placeholder="••••••••" required minlength="8" autocomplete="new-password">
+        </div>
+
+        <button type="submit" class="fp-btn" id="btn-save-pass">
+          🔒 Update Password
+        </button>
+      </form>
+    </div>
+
+    <!-- ═══ STEP 3: Success ═══ -->
+    <div id="step-3-view" style="display:none;text-align:center">
+      <div style="font-size:3.5rem;margin-bottom:12px">🎉</div>
+      <h2 class="fp-title" style="color:#15803D">Password Updated!</h2>
+      <p class="fp-sub" style="margin-bottom:28px">Your password has been securely updated. You can now log in to your Yuvantara Student Portal with your new credentials.</p>
+      <a href="../portal/index.html" class="fp-btn" style="text-decoration:none">
+        Proceed to Portal Login →
+      </a>
+    </div>
+
+    <div style="text-align:center;margin-top:24px;font-size:.88rem;color:#64748B">
+      Remembered your password? <a href="../portal/index.html" style="color:#2563EB;font-weight:600">Back to Login</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../assets/config.js?v=20261127c"></script>
+<script src="../assets/db.js?v=20261127c"></script>
+<script src="../assets/cloud-db.js?v=20261127c"></script>
+<script src="../assets/otp-service.js?v=20261127c"></script>
+<script>
+(function() {
+  'use strict';
+
+  var verifiedEmail = '';
+  var captchaAnswer = 0;
+
+  function generateCaptcha() {
+    var a = Math.floor(Math.random() * 12) + 1;
+    var b = Math.floor(Math.random() * 10) + 1;
+    captchaAnswer = a + b;
+    var qEl = document.getElementById('fp-captcha-q');
+    if (qEl) qEl.textContent = 'What is ' + a + ' + ' + b + ' ?';
+    var ansEl = document.getElementById('fp-captcha-ans');
+    if (ansEl) ansEl.value = '';
+  }
+
+  generateCaptcha();
+
+  function goToStep(step) {
+    ['step-1-view', 'step-2-view', 'step-3-view'].forEach(function(id, idx) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = (idx + 1 === step) ? 'block' : 'none';
+    });
+
+    var dot1 = document.getElementById('dot-1');
+    var dot2 = document.getElementById('dot-2');
+    var icon = document.getElementById('step-icon');
+
+    if (step === 1) {
+      if (dot1) dot1.className = 'fp-step-dot active';
+      if (dot2) dot2.className = 'fp-step-dot';
+      if (icon) icon.textContent = '🔐';
+    } else if (step === 2) {
+      if (dot1) dot1.className = 'fp-step-dot done';
+      if (dot2) dot2.className = 'fp-step-dot active';
+      if (icon) icon.textContent = '🔑';
+    } else if (step === 3) {
+      if (dot1) dot1.className = 'fp-step-dot done';
+      if (dot2) dot2.className = 'fp-step-dot done';
+      if (icon) icon.textContent = '✅';
+    }
+  }
+
+  // Step 1: Verify Email, DOB & Captcha
+  var formVerify = document.getElementById('form-fp-verify');
+  var alert1 = document.getElementById('alert-1');
+
+  formVerify.addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert1.style.display = 'none';
+
+    var email = document.getElementById('fp-email').value.trim().toLowerCase();
+    var enteredCaptcha = parseInt(document.getElementById('fp-captcha-ans').value, 10);
+
+    // 1. Verify Captcha
+    if (isNaN(enteredCaptcha) || enteredCaptcha !== captchaAnswer) {
+      alert1.textContent = 'Incorrect captcha solution. Please calculate again.';
+      alert1.style.display = 'block';
+      generateCaptcha();
+      return;
+    }
+
+    if (!window.YuvantaraDB) {
+      alert1.textContent = 'Database service unavailable. Please refresh.';
+      alert1.style.display = 'block';
+      return;
+    }
+
+    // 2. Only active student accounts can self-reset (same generic message for unknown / admin / suspended).
+    //    The latest copy of the account is fetched NOW (on demand) - the page itself no longer downloads anything on load.
+    var freshP = (YuvantaraDB.ensureFresh) ? YuvantaraDB.ensureFresh(60000) : Promise.resolve();
+    freshP.then(function() {
+    var user = YuvantaraDB.getUserByEmail(email);
+    if (!user || user.role === 'admin' || user.role === 'superadmin' || user.status === 'suspended') {
+      alert1.textContent = 'We could not verify this email. Please check it, or contact support at yuvantaraventures@gmail.com.';
+      alert1.style.display = 'block';
+      generateCaptcha();
+      return;
+    }
+
+    // 3. Email OTP
+    var btn = document.getElementById('btn-verify-identity');
+    if (btn) btn.disabled = true;
+    YuvantaraOTP.verifyEmail({ email: email, purpose: 'forgot_password', name: user.name }).then(function(ok) {
+      if (btn) btn.disabled = false;
+      if (!ok) {
+        alert1.textContent = 'Email verification was cancelled. Please try again.';
+        alert1.style.display = 'block';
+        generateCaptcha();
+        return;
+      }
+      verifiedEmail = email;
+      var targetEmailEl = document.getElementById('verified-target-email');
+      if (targetEmailEl) targetEmailEl.textContent = email;
+      goToStep(2);
+    });
+    });   // end of freshP.then
+  });
+
+  // Step 2: Password strength meter
+  var newPassInput = document.getElementById('fp-new-pass');
+  var strengthFill = document.getElementById('strength-fill');
+  var strengthText = document.getElementById('strength-text');
+
+  newPassInput.addEventListener('input', function() {
+    var p = newPassInput.value;
+    var score = 0;
+    if (p.length >= 8) score++;
+    if (/[0-9]/.test(p)) score++;
+    if (/[A-Z]/.test(p)) score++;
+    if (/[^A-Za-z0-9]/.test(p)) score++;
+
+    if (p.length < 8) {
+      strengthFill.style.width = '25%';
+      strengthFill.style.background = '#EF4444';
+      strengthText.textContent = 'Too short (minimum 8 characters)';
+      strengthText.style.color = '#EF4444';
+    } else if (score <= 2) {
+      strengthFill.style.width = '50%';
+      strengthFill.style.background = '#F59E0B';
+      strengthText.textContent = 'Fair (add uppercase & special character)';
+      strengthText.style.color = '#F59E0B';
+    } else {
+      strengthFill.style.width = '100%';
+      strengthFill.style.background = '#10B981';
+      strengthText.textContent = 'Strong password ✓';
+      strengthText.style.color = '#10B981';
+    }
+  });
+
+  // Step 2: Update Password Form
+  var formReset = document.getElementById('form-fp-reset');
+  var alert2 = document.getElementById('alert-2');
+
+  formReset.addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert2.style.display = 'none';
+
+    var p1 = document.getElementById('fp-new-pass').value;
+    var p2 = document.getElementById('fp-confirm-pass').value;
+
+    if (p1.length < 8) {
+      alert2.textContent = 'Password must be at least 8 characters long.';
+      alert2.style.display = 'block';
+      return;
+    }
+    if (!/[0-9]/.test(p1)) {
+      alert2.textContent = 'Password must include at least one number (0–9).';
+      alert2.style.display = 'block';
+      return;
+    }
+    if (p1 !== p2) {
+      alert2.textContent = 'Passwords do not match. Please re-enter.';
+      alert2.style.display = 'block';
+      return;
+    }
+
+    var res = YuvantaraDB.resetPassword(verifiedEmail, p1);
+    if (res.success) {
+      goToStep(3);
+    } else {
+      alert2.textContent = res.message || 'Error updating password.';
+      alert2.style.display = 'block';
+    }
+  });
+
+})();
+</script>
+<script src="../assets/header.js?v=20261127c"></script>
+<script src="../assets/footer.js?v=20261127c"></script>
+</body>
+</html>

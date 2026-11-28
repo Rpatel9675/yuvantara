@@ -1,0 +1,51 @@
+rules_version = '2';
+
+// Yuvantara Firestore rules.
+// The website talks to Firestore directly from the browser using the public web API key, so these rules are the
+// ONLY protection for the data. They deny everything except the three collections the site uses, and add
+// validation so records cannot be junk, oversized, or contain plaintext passwords.
+// (Phase 2 - server-side login - would let you lock these down further. See DEPLOY.md.)
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function validUser(id) {
+      let d = request.resource.data;
+      return d.keys().size() < 80
+        && d.email is string
+        && d.email.size() < 150
+        && d.email.lower() == id
+        && !('password' in d)            // never allow plaintext passwords
+        && d.get('role', 'student') == 'student';   // admin accounts can never be created/edited from the browser
+    }
+
+    match /users/{id} {
+      allow read: if true;
+      allow create: if validUser(id);
+      allow update: if validUser(id) && resource.data.get('role', 'student') == 'student';
+      // resource == null lets a delete of a not-yet-existing document succeed (otherwise the rule errors and the WHOLE batch is rejected)
+      allow delete: if resource == null || resource.data.get('role', 'student') == 'student';   // admin portal removes student accounts
+    }
+
+    match /deleted_users/{id} {
+      allow read: if true;
+      allow create, update: if request.resource.data.keys().size() < 5 && request.resource.data.email is string;
+      allow delete: if false;
+    }
+
+    // Audit trail is append-only: nobody can edit or erase history from the browser
+    match /audit_logs/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().size() < 30;
+      allow update, delete: if false;
+    }
+
+    // Written by the Node server (Admin SDK bypasses rules). Browsers get no access.
+    match /applications/{id} {
+      allow read, write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Issue Documents | Yuvantara Admin</title><link rel="stylesheet" href="../assets/style.css">
+<style>body{background:#f4f6fb;color:#111}main{max-width:980px;margin:24px auto;padding:0 16px}.card{background:#fff;border:1px solid #dde3ee;border-radius:12px;padding:18px;margin-bottom:18px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}label{font-size:12px;font-weight:600;color:#445;display:block;margin-bottom:3px}
+input,select{width:100%;padding:9px;border:1px solid #c9d1e2;border-radius:8px;font:inherit;background:#fff;color:#111;box-sizing:border-box}
+button.b{padding:10px 16px;border:0;border-radius:8px;background:#1b4283;color:#fff;font-weight:600;cursor:pointer;margin:8px 8px 0 0}button.s{background:#e8edf7;color:#1b4283}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:7px;border-bottom:1px solid #eee;text-align:left}#msg{padding:10px;border-radius:8px;margin-top:10px;display:none}.ok{background:#e7f7ec;color:#14532d}.er{background:#fde8e8;color:#7f1d1d}</style></head><body><main>
+<h1>📜 Issue Offer Letter &amp; Internship Certificate</h1><p><a href="index.html">← Back to admin console</a></p>
+<div class="card"><label>Admin API key (saved in this browser after the first time)</label><input id="key" type="password" autocomplete="off" placeholder="ADMIN_API_KEY configured on Render"><button class="b s" type="button" id="forget">Forget key</button></div>
+<form id="f" class="card"><div class="g">
+<div><label>Documents to issue *</label><select name="docType" id="docType"><option value="both">Offer letter + Certificate</option><option value="offer">Offer letter only</option></select></div>
+<div><label>Full name *</label><input name="name" required></div><div><label>Email (documents are sent here) *</label><input name="email" type="email" required></div>
+<div><label>University roll no.</label><input name="rollNo"></div><div><label>Institution</label><input name="institution"></div>
+<div><label>Domain / role *</label><input name="domain" required placeholder="Full Stack Web Development"></div>
+<div><label>Mode</label><select name="mode"><option>Online</option><option>Offline</option><option>Hybrid</option></select></div>
+<div><label>Start date *</label><input name="startDate" type="date" required></div><div><label>End date *</label><input name="endDate" type="date" required></div>
+<div id="wA"><label>Attendance % *</label><input name="attendance" type="number" min="0" max="100" required value="90"></div><div id="wM"><label>Final marks % *</label><input name="marks" type="number" min="0" max="100" required value="85"></div>
+<div><label>Date of issue</label><input name="issueDate" type="date"></div><div><label>Offer letter date</label><input name="offerDate" type="date"></div>
+<div><label>Stipend</label><input name="stipend" placeholder="Unpaid (learning-based)"></div><div><label>Reporting to</label><input name="reportingTo" placeholder="Assigned Mentor"></div>
+<div><label>Certificate no. (blank = auto)</label><input name="certNo" placeholder="YV-2026-000001"></div>
+</div>
+<button class="b" type="submit">Generate &amp; email to user</button><button class="b s" type="button" id="p1">Preview certificate</button><button class="b s" type="button" id="p2">Preview offer letter</button>
+<label style="margin-top:10px"><input type="checkbox" id="noMail" style="width:auto"> Save only (don't email now)</label><div id="msg"></div></form>
+<div class="card"><h3>Issued documents</h3><button class="b s" id="ref">Refresh list</button><div style="overflow:auto"><table><thead><tr><th>Cert no.</th><th>Name</th><th>Email</th><th>Domain</th><th>Documents</th><th>Emailed</th><th></th></tr></thead><tbody id="rows"></tbody></table></div></div>
+<script src="../assets/config.js"></script><script>
+(function(){var API=(window.YUVANTARA_CONFIG&&((YUVANTARA_CONFIG.api&&YUVANTARA_CONFIG.api.baseUrl)||YUVANTARA_CONFIG.baseUrl))||'/api';
+function $(i){return document.getElementById(i)}var key=$('key');try{key.value=localStorage.getItem('yv_admin_key')||sessionStorage.getItem('yv_admin_key')||''}catch(e){}
+key.oninput=function(){try{localStorage.setItem('yv_admin_key',key.value)}catch(e){}};
+$('forget').onclick=function(){key.value='';try{localStorage.removeItem('yv_admin_key');sessionStorage.removeItem('yv_admin_key')}catch(e){}$('rows').innerHTML=''};
+function msg(t,ok){var m=$('msg');m.style.display='block';m.className=ok?'ok':'er';m.textContent=t}
+function body(){var o={};new FormData($('f')).forEach(function(v,k){if(v!=='')o[k]=v});return o}
+function H(){return{'content-type':'application/json','x-admin-key':key.value}}
+function api(p,opt){return fetch(API+p,opt).then(function(r){return r.json().catch(function(){throw new Error('Server returned a web page, not data (HTTP '+r.status+'). The Render server may not be running the latest version yet - redeploy it and try again.')}).then(function(j){if(!r.ok||j.success===false)throw new Error(j.error||('HTTP '+r.status));return j})})}
+function pdf(path,opt,name){return fetch(API+path,opt).then(function(r){if(!r.ok)return r.json().then(function(j){throw new Error(j.error||r.status)});return r.blob()}).then(function(b){var u=URL.createObjectURL(b);window.open(u,'_blank')||(location.href=u)})}
+$('f').onsubmit=function(e){e.preventDefault();var b=body();if($('noMail').checked)b.sendEmail=false;msg('Generating…',true);
+ api('/admin/documents/issue',{method:'POST',headers:H(),body:JSON.stringify(b)}).then(function(j){var r=j.record;var what=r.certIssuedAt?(r.certNo+' / '+r.offerRef):('offer letter '+r.offerRef);var us=j.user==='added'?' User added to the database.':j.user==='exists'?' (User already in the database.)':j.user==='local'?' User saved on the server only (Firestore Admin is not connected).':(j.userError?' User NOT added to the database: '+j.userError:'');msg('Issued '+what+(j.emailed?' — emailed to '+r.email:(j.emailError?' — saved, but email failed: '+j.emailError:' — saved (not emailed)'))+'.'+us,!j.emailError&&!j.userError);load()}).catch(function(x){msg(x.message)})};
+function prev(k){return function(){pdf('/admin/documents/preview/'+k,{method:'POST',headers:H(),body:JSON.stringify(body())}).catch(function(x){msg(x.message)})}}
+$('p1').onclick=prev('certificate');$('p2').onclick=prev('offer');
+function mode(){var off=$('docType').value==='offer';['wA','wM'].forEach(function(i){var w=$(i);w.style.display=off?'none':'';var inp=w.querySelector('input');inp.required=!off});$('p1').style.display=off?'none':''}
+$('docType').onchange=mode;mode();
+function load(){api('/admin/documents',{headers:H()}).then(function(j){var t=$('rows');t.innerHTML='';j.records.forEach(function(r){var tr=document.createElement('tr');
+ [r.certNo,r.name,r.email,r.domain,r.certIssuedAt?'Offer + Certificate':'Offer only',r.emailedAt?r.emailedAt.slice(0,10):'no'].forEach(function(v){var td=document.createElement('td');td.textContent=v;tr.appendChild(td)});
+ var td=document.createElement('td');[['Cert','certificate'],['Offer','offer']].filter(function(a){return a[1]!=='certificate'||r.certIssuedAt}).forEach(function(a){var b=document.createElement('button');b.className='b s';b.textContent=a[0];b.onclick=function(){pdf('/admin/documents/'+encodeURIComponent(r.certNo)+'/pdf/'+a[1],{headers:H()}).catch(function(x){msg(x.message)})};td.appendChild(b)});
+ if(!r.certIssuedAt){var sc=document.createElement('button');sc.className='b';sc.textContent='Send certificate';sc.onclick=function(){var a=prompt('Attendance % for '+r.name+' (0-100)','90');if(a===null)return;var m=prompt('Final marks % (0-100)','85');if(m===null)return;msg('Issuing certificate…',true);api('/admin/documents/'+encodeURIComponent(r.certNo)+'/certificate',{method:'POST',headers:H(),body:JSON.stringify({attendance:a,marks:m})}).then(function(j){var us=j.user==='updated'||j.user==='added'?' Student record updated in the database.':(j.user==='updated-local'||j.user==='local')?' Student saved on the server only (Firestore Admin is not connected).':(j.userError?' Student record NOT updated: '+j.userError:'');msg('Certificate '+j.record.certNo+(j.emailed?' emailed to '+j.record.email:(j.emailError?' issued, but email failed: '+j.emailError:' issued (not emailed)'))+'.'+us,!j.emailError&&!j.userError);load()}).catch(function(x){msg(x.message)})};td.appendChild(sc)}
+ var rs=document.createElement('button');rs.className='b';rs.textContent='Resend';rs.onclick=function(){api('/admin/documents/'+encodeURIComponent(r.certNo)+'/resend',{method:'POST',headers:H()}).then(function(){msg('Re-sent to '+r.email,true);load()}).catch(function(x){msg(x.message)})};td.appendChild(rs);tr.appendChild(td);t.appendChild(tr)})}).catch(function(x){if(key.value)msg(x.message)})}
+$('ref').onclick=load;if(key.value)load();})();
+</script></main></body></html>

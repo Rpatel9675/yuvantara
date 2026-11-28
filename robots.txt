@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /portal/
+Disallow: /admin_login_777/
+Disallow: /data/
+Disallow: /server/
+Allow: /
+
+Sitemap: https://yuvantaraventure.com/sitemap.xml
